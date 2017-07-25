@@ -28,7 +28,7 @@ class KepindahanController extends Controller
 	{
 		return array(
 			array('allow',
-				'actions'=>array('tambah','update','view','delete','kelola','daftar','view','desa','loadKecamatan','loadIdKota','loadKota','loadIdProvinsi','loadProvinsi','daftarverifikasi'),
+				'actions'=>array('tambah','update','view','delete','kelola','daftar','view','desa','loadKecamatan','loadIdKota','loadKota','loadIdProvinsi','loadProvinsi','daftarverifikasi','terima','tolak','print','kabkota','kecamatan','loaddesa','report'),
 				'users'=>array('@'),
 				'expression'=>'Yii::app()->user->getLevel()==1',
 				),
@@ -261,4 +261,75 @@ class KepindahanController extends Controller
 			'dataProvider'=>$dataProvider,
 			));
 	}		
+
+
+	public function actionTerima($id)
+	{
+		$model=$this->loadModel($id);
+		$model->status=1;
+		if($model->save()){
+			$this->redirect(array('view','id'=>$model->id_kepindahan));
+		}
+	}
+
+	public function actionTolak($id)
+	{
+		$model=$this->loadModel($id);
+		$model->status=2;
+		if($model->save()){
+			$this->redirect(array('view','id'=>$model->id_kepindahan));
+		}
+	}		
+
+	public function actionPrint($id)
+	{
+		$this->layout = "print";
+		$this->render('print',array(
+			'model'=>$this->loadModel($id),
+			));
+	}	
+
+	public function actionKabKota()
+	{
+		$data=Kota::model()->findAll('province_id=:province_id', 
+			array(':province_id'=>(int) $_POST['province_id']));
+
+		$data=CHtml::listData($data,'id','name');
+
+		echo "<option value=''>-- Pilih Kabupaten / Kota --</option>";
+		foreach($data as $value=>$name)
+			echo CHtml::tag('option', array('value'=>$value),CHtml::encode($name),true);
+	}
+
+	public function actionKecamatan()
+	{
+		$data=Kecamatans::model()->findAll('regency_id=:regency_id', 
+			array(':regency_id'=>(int) $_POST['regency_id']));
+
+		$data=CHtml::listData($data,'id','name');
+
+		echo "<option value=''>-- Pilih Kecamatan --</option>";
+		foreach($data as $value=>$name)
+			echo CHtml::tag('option', array('value'=>$value),CHtml::encode($name),true);
+	}	
+
+	public function actionLoadDesa()
+	{
+		$data=Desas::model()->findAll('district_id=:district_id', 
+			array(':district_id'=>(int) $_POST['district_id']));
+
+		$data=CHtml::listData($data,'id','name');
+
+		echo "<option value=''>-- Pilih Desa --</option>";
+		foreach($data as $value=>$name)
+			echo CHtml::tag('option', array('value'=>$value),CHtml::encode($name),true);
+	}		
+
+	public function actionReport()
+	{
+		$dataProvider=new CActiveDataProvider('Kepindahan');
+		$this->render('report',array(
+			'dataProvider'=>$dataProvider,
+			));
+	}				
 }

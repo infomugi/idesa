@@ -28,7 +28,7 @@ class SktmController extends Controller
 	{
 		return array(
 			array('allow',
-				'actions'=>array('tambah','update','view','delete','kelola','daftar','view','daftarverifikasi'),
+				'actions'=>array('tambah','update','view','delete','kelola','daftar','view','daftarverifikasi','terima','tolak','print','report'),
 				'users'=>array('@'),
 				'expression'=>'Yii::app()->user->getLevel()==1',
 				),
@@ -182,4 +182,39 @@ class SktmController extends Controller
 			'dataProvider'=>$dataProvider,
 			));
 	}		
+
+	public function actionTerima($id)
+	{
+		$model=$this->loadModel($id);
+		$model->status=1;
+		if($model->save()){
+			$this->redirect(array('view','id'=>$model->id_sktm));
+		}
+	}
+
+	public function actionTolak($id)
+	{
+		$model=$this->loadModel($id);
+		$model->status=2;
+		if($model->save()){
+			$this->redirect(array('view','id'=>$model->id_sktm));
+		}
+	}		
+
+	public function actionPrint($id)
+	{
+		$this->layout = "print";
+		$this->render('print',array(
+			'model'=>$this->loadModel($id),
+			));
+	}	
+
+	public function actionReport()
+	{
+		$dataProvider=new CActiveDataProvider('Sktm');
+		$this->render('report',array(
+			'dataProvider'=>$dataProvider,
+			));
+	}		
+
 }

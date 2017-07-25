@@ -139,5 +139,17 @@ class User extends CActiveRecord
 		return $model->nama;
 	}
 
+	public function level($data){
+		if($data==1){
+			return "Administrator";
+		}else if($data==2){
+			return "Kepala Desa";
+		}else if($data==3){
+			return "Bagian Pengelolaan Data Masyarakat";
+		}else{
+			return "Bagian Pelayanan Masyarakat";
+		}
+	}
+
 
 }

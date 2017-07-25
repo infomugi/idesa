@@ -34,12 +34,24 @@ $this->pageTitle='Detail SKTM';
 								),  array('class' => 'btn btn-warning btn-flat', 'title'=>'Hapus SKTM'));
 								?>
 
-								<?php echo CHtml::link('<i class="fa fa-print"></i> Cetak SKTM', 
-									array('print', 'id'=>$model->id_sktm,
-										),  array('class' => 'btn btn-danger pull-right btn-flat', 'title'=>'Print SKTM'));
-										?>
+								<?php echo CHtml::link(CHtml::encode("Setujui SKTM"), array('terima', 'id'=>$model->id_sktm),array('class'=>'btn btn-success')); ?>
+
+								<?php echo CHtml::link(CHtml::encode("Tolak SKTM"), array('tolak', 'id'=>$model->id_sktm),array('class'=>'btn btn-danger')); ?>
+
+								<?php if($model->status==1): ?>
+
+									<?php echo CHtml::link('<i class="fa fa-print"></i> Cetak SKTM', 
+										array('print', 'id'=>$model->id_sktm,
+											),  array('class' => 'btn btn-primary pull-right btn-flat', 'title'=>'Print SKTM'));
+											?>
+											
+										<?php endif; ?>
 
 										<HR>
+
+											<div class="alert <?php echo Kepindahan::model()->alert($model->status); ?>">
+												<?php echo Kepindahan::model()->status($model->status); ?>
+											</div>
 
 											<?php $this->widget('zii.widgets.CDetailView', array(
 												'data'=>$model,
@@ -65,7 +77,7 @@ $this->pageTitle='Detail SKTM';
 													array('name'=>'agama_ibu','value'=>$model->AgamaIbu->nama),
 													array('name'=>'pekerjaan_ibu','value'=>$model->PekerjaanIbu->nama),
 													'alamat_ibu',
-													array('name'=>'status','value'=>Kepindahan::model()->status($model->status)),
+													// array('name'=>'status','value'=>Kepindahan::model()->status($model->status)),
 													// 'status',
 													),
 													)); ?>

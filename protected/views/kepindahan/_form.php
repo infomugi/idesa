@@ -103,57 +103,28 @@
 			<div class="form-group">
 
 				<div class="col-sm-4 control-label">
-					<?php echo $form->labelEx($model,'desa_id'); ?>
+					<?php echo $form->labelEx($model,'provinsi_id'); ?>
 				</div>   
 
 				<div class="col-sm-8">
-					<?php echo $form->error($model,'desa_id'); ?>
-					<?php 
-					$this->widget('zii.widgets.jui.CJuiAutoComplete', 
-						array( 
-							'name'=>'search', 
-							'source'=>$this->createUrl('desa'), 
-							'options'=>array( 
-								'showAnim'=>'fold', 
-								'select' => 'js:function(event, ui) {
-									$("#Kepindahan_kecamatan_id").val(ui.item.kecamatan_id);
-									$("#Kepindahan_desa_id").val(ui.item.desa_id);
-									$("#nama_kecamatan").val("KECAMATAN " + ui.item.nama_kecamatan);
-									$("#Kepindahan_kabkota_id").val(ui.item.kota_id);
-									$("#nama_kota").val("KABUPATEN " + ui.item.nama_kota);
-									$("#Kepindahan_provinsi_id").val(ui.item.provinsi_id);
-									$("#nama_provinsi").val("PROVINSI " + ui.item.nama_provinsi);
-									return false;
-								}'
-								), 
-							'htmlOptions'=>array(
-								'class'=>'form-control',
-								'placeholder'=>'Cari Desa'
-								),
-							)); 
-							?>					
-							<div style="display:none">
-								<?php echo $form->textField($model,'desa_id',array('class'=>'form-control')); ?>
-							</div>
+					<?php echo $form->error($model,'provinsi_id'); ?>
+					<?php echo $form->dropDownList($model, "provinsi_id",
+						CHtml::listData(Provinsi::model()->findAll(array('condition'=>'','order'=>'name ASC')),
+							'id', 'name'
+							),
+						array("empty"=>"-- Pilih Provinsi --", 'class'=>'form-control','ajax' => array(
+							'type'=>'POST', 
+							'url'=>Yii::app()->createUrl('kepindahan/kabkota'), 
+							'update'=>'#Kepindahan_kabkota_id', 
+							'data'=>array('province_id'=>'js:this.value'),
+							))
+							); ?> 
+
+
+							
 						</div>
 
 					</div>  
-
-					<div class="form-group">
-
-						<div class="col-sm-4 control-label">
-							<?php echo $form->labelEx($model,'kecamatan_id'); ?>
-						</div>   
-
-						<div class="col-sm-8">
-							<?php echo $form->error($model,'kecamatan_id'); ?>
-							<input type="text" name="" class="form-control" id="nama_kecamatan" readonly="true">
-							<div style="display:none">
-								<?php echo $form->textField($model,'kecamatan_id',array('class'=>'form-control')); ?>
-							</div>
-						</div>
-
-					</div> 		
 
 
 
@@ -165,118 +136,150 @@
 
 						<div class="col-sm-8">
 							<?php echo $form->error($model,'kabkota_id'); ?>
-							<input type="text" name="" class="form-control" id="nama_kota" readonly="true">
-							<div style="display:none">
-								<?php echo $form->textField($model,'kabkota_id',array('class'=>'form-control')); ?>
-							</div>
-						</div>
-
-					</div>  
-
-
-
-
-					<div class="form-group">
-
-						<div class="col-sm-4 control-label">
-							<?php echo $form->labelEx($model,'provinsi_id'); ?>
-						</div>   
-
-						<div class="col-sm-8">
-							<?php echo $form->error($model,'provinsi_id'); ?>
-							<input type="text" name="" class="form-control" id="nama_provinsi" readonly="true">
-							<div style="display:none">
-								<?php echo $form->textField($model,'provinsi_id',array('class'=>'form-control')); ?>
-							</div>
-						</div>
-
-					</div>  
-
-
-
-
-					<div class="form-group">
-
-						<div class="col-sm-4 control-label">
-							<?php echo $form->labelEx($model,'jenis_kepindahan'); ?>
-						</div>   
-
-						<div class="col-sm-8">
-							<?php echo $form->error($model,'jenis_kepindahan'); ?>
-							<?php
-							echo $form->radioButtonList($model,'jenis_kepindahan',
-								array('1'=>'Kepala Keluarga','2'=>'Kepala & Seluruh Anggota','3'=>'Kepala & Sebagian Keluarga','4'=>'Anggota Keluarga'),
+							<?php echo $form->dropDownList($model, "kabkota_id",
+								array(),
 								array(
-									'template'=>'{input}{label}',
-									'separator'=>'',
-									'labelOptions'=>array(
-										'class'=>'minimal', 'style'=>'padding-right:20px;margin-left:5px'),
-
-									)                              
-								);
-								?>
-							</div>
-
-						</div>  
-
-
-						<div class="form-group">
-
-							<div class="col-sm-4 control-label">
-								<?php echo $form->labelEx($model,'status_kk_yang_tidak_pindah'); ?>
-							</div>   
-
-							<div class="col-sm-8">
-								<?php echo $form->error($model,'status_kk_yang_tidak_pindah'); ?>
-								<?php
-								echo $form->radioButtonList($model,'status_kk_yang_tidak_pindah',
-									array('1'=>'Tetap','2'=>'KK Baru'),
-									array(
-										'template'=>'{input}{label}',
-										'separator'=>'',
-										'labelOptions'=>array(
-											'class'=>'minimal', 'style'=>'padding-right:20px;margin-left:5px'),
-
-										)                              
-									);
-									?>
-								</div>
-
-							</div>  
-
-
-							<div class="form-group">
-
-								<div class="col-sm-4 control-label">
-									<?php echo $form->labelEx($model,'status_kk_pindah'); ?>
-								</div>   
-
-								<div class="col-sm-8">
-									<?php echo $form->error($model,'status_kk_pindah'); ?>
-									<?php
-									echo $form->radioButtonList($model,'status_kk_pindah',
-										array('1'=>'Numpang KK','2'=>'Membuat KK Baru'),
-										array(
-											'template'=>'{input}{label}',
-											'separator'=>'',
-											'labelOptions'=>array(
-												'class'=>'minimal', 'style'=>'padding-right:20px;margin-left:5px'),
-
-											)                              
-										);
-										?>
+									'prompt'=>'-- Pilih Kabupaten / Kota --.',
+									'class'=>'form-control selectz',
+									'ajax' => array(
+										'type'=>'POST', 
+										'url'=>Yii::app()->createUrl('kepindahan/kecamatan'), 
+										'update'=>'#Kepindahan_kecamatan_id', 
+										'data'=>array('regency_id'=>'js:this.value'),
+										))
+										); ?> 
 									</div>
 
 								</div>  
 
 
 								<div class="form-group">
-									<div class="col-md-12">  
-									</br></br>
-									<?php echo CHtml::submitButton($model->isNewRecord ? 'Simpan' : 'Edit', array('class' => 'btn btn-info btn-flat pull-right')); ?>
-								</div>
-							</div>
 
-							<?php $this->endWidget(); ?>
+									<div class="col-sm-4 control-label">
+										<?php echo $form->labelEx($model,'kecamatan_id'); ?>
+									</div>   
+
+									<div class="col-sm-8">
+										<?php echo $form->error($model,'kecamatan_id'); ?>
+										<?php echo $form->dropDownList($model, "kecamatan_id",
+											array(),
+											array(
+												'prompt'=>'-- Pilih Kecamatan --.',
+												'class'=>'form-control selectz',
+												'ajax' => array(
+													'type'=>'POST', 
+													'url'=>Yii::app()->createUrl('kepindahan/loaddesa'), 
+													'update'=>'#Kepindahan_desa_id', 
+													'data'=>array('district_id'=>'js:this.value'),
+													))
+													); ?> 
+												</div>
+
+											</div> 		
+
+
+
+											<div class="form-group">
+
+												<div class="col-sm-4 control-label">
+													<?php echo $form->labelEx($model,'desa_id'); ?>
+												</div>   
+
+												<div class="col-sm-8">
+													<?php echo $form->error($model,'desa_id'); ?>
+													<?php echo $form->dropDownList($model, "desa_id",
+														array(),
+														array(
+															'prompt'=>'-- Pilih Desa --.',
+															'class'=>'form-control selectz'
+															)); ?> 
+														</div>
+
+													</div>  
+
+
+													<div class="form-group">
+
+														<div class="col-sm-4 control-label">
+															<?php echo $form->labelEx($model,'jenis_kepindahan'); ?>
+														</div>   
+
+														<div class="col-sm-8">
+															<?php echo $form->error($model,'jenis_kepindahan'); ?>
+															<?php
+															echo $form->radioButtonList($model,'jenis_kepindahan',
+																array('1'=>'Kepala Keluarga','2'=>'Kepala & Seluruh Anggota','3'=>'Kepala & Sebagian Keluarga','4'=>'Anggota Keluarga'),
+																array(
+																	'template'=>'{input}{label}',
+																	'separator'=>'',
+																	'labelOptions'=>array(
+																		'class'=>'minimal', 'style'=>'padding-right:20px;margin-left:5px'),
+
+																	)                              
+																);
+																?>
+															</div>
+
+														</div>  
+
+
+														<div class="form-group">
+
+															<div class="col-sm-4 control-label">
+																<?php echo $form->labelEx($model,'status_kk_yang_tidak_pindah'); ?>
+															</div>   
+
+															<div class="col-sm-8">
+																<?php echo $form->error($model,'status_kk_yang_tidak_pindah'); ?>
+																<?php
+																echo $form->radioButtonList($model,'status_kk_yang_tidak_pindah',
+																	array('1'=>'Tetap','2'=>'KK Baru'),
+																	array(
+																		'template'=>'{input}{label}',
+																		'separator'=>'',
+																		'labelOptions'=>array(
+																			'class'=>'minimal', 'style'=>'padding-right:20px;margin-left:5px'),
+
+																		)                              
+																	);
+																	?>
+																</div>
+
+															</div>  
+
+
+															<div class="form-group">
+
+																<div class="col-sm-4 control-label">
+																	<?php echo $form->labelEx($model,'status_kk_pindah'); ?>
+																</div>   
+
+																<div class="col-sm-8">
+																	<?php echo $form->error($model,'status_kk_pindah'); ?>
+																	<?php
+																	echo $form->radioButtonList($model,'status_kk_pindah',
+																		array('1'=>'Numpang KK','2'=>'Membuat KK Baru'),
+																		array(
+																			'template'=>'{input}{label}',
+																			'separator'=>'',
+																			'labelOptions'=>array(
+																				'class'=>'minimal', 'style'=>'padding-right:20px;margin-left:5px'),
+
+																			)                              
+																		);
+																		?>
+																	</div>
+
+																</div>  
+
+
+																<div class="form-group">
+																	<div class="col-md-12">  
+																	</br></br>
+																	<?php echo CHtml::submitButton($model->isNewRecord ? 'Simpan' : 'Edit', array('class' => 'btn btn-info btn-flat pull-right')); ?>
+																</div>
+															</div>
+
+															<?php $this->endWidget(); ?>
 
 </div></div><!-- form -->

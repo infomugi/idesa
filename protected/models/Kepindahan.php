@@ -41,7 +41,8 @@ class Kepindahan extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('tanggal_buat, petugas_id, no_kk, nama_kk, alamat, kode_pos, alasan_pindah, alamat_tujuan, provinsi_id, kabkota_id, kecamatan_id, desa_id, jenis_kepindahan, status_kk_yang_tidak_pindah, status_kk_pindah, status', 'required'),
-			array('petugas_id, provinsi_id, kabkota_id, kecamatan_id, desa_id, jenis_kepindahan, status_kk_yang_tidak_pindah, status_kk_pindah, status', 'numerical', 'integerOnly'=>true),
+			array('petugas_id, provinsi_id, kabkota_id, kecamatan_id, jenis_kepindahan, status_kk_yang_tidak_pindah, status_kk_pindah, status', 'numerical', 'integerOnly'=>true),
+			array('desa_id', 'length', 'max'=>10),
 			array('no_kk', 'length', 'max'=>25),
 			array('nama_kk', 'length', 'max'=>50),
 			array('kode_pos', 'length', 'max'=>6),
@@ -182,4 +183,14 @@ class Kepindahan extends CActiveRecord
 			return "Dalam Proses (Tinggal di Verifikasi Kepala Desa)";
 		}
 	}	
+
+	public function alert($data){
+		if($data==1){
+			return "alert-success";
+		}else if($data==2){
+			return "alert-danger";
+		}else{
+			return "alert-info";
+		}
+	}		
 }

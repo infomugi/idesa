@@ -102,9 +102,9 @@
 
                       array('label'=>'Laporan <span class="caret"></span>', 'url'=>'#','itemOptions'=>array('class'=>'dropdown','tabindex'=>"-1"),'linkOptions'=>array('class'=>'dropdown-toggle','data-toggle'=>"dropdown"), 
                         'items'=>array(
-                          array('label'=>'Rekapitulasi Surat SKTM','url'=>array('/sktm/daftar')),
-                          array('label'=>'Rekapitulasi Surat Pengantar KK','url'=>array('/keluarga/daftar')),
-                          array('label'=>'Rekapitulasi Surat Keterangan Pindah','url'=>array('/kepindahan/daftar')),
+                          array('label'=>'Rekapitulasi Surat SKTM','url'=>array('/sktm/report')),
+                          array('label'=>'Rekapitulasi Surat Pengantar KK','url'=>array('/keluarga/report')),
+                          array('label'=>'Rekapitulasi Surat Keterangan Pindah','url'=>array('/kepindahan/report')),
                           ),'visible'=>Yii::app()->user->getLevel()==1),                                               
 
 

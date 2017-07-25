@@ -36,10 +36,13 @@ $this->pageTitle='Kelola User';
 							'htmlOptions'=>array('width'=>'10px', 
 								'style' => 'text-align: center;')),
 
+						'namalengkap',
 						'username',
+						'email',
 						// array('name'=>'bagian','value'=>'$data->Kecamatan->nama'),
 						'handphone',
 						'email',
+						array('header'=>'level','value'=>'$data->level'),
 
 						array(
 							'header'=>'Action',

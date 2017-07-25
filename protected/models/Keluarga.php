@@ -77,7 +77,7 @@ class Keluarga extends CActiveRecord
 	{
 		return array(
 			'kd_umpi' => 'Kode UMPI',
-			'tglupdate' => 'Tanggal',
+			'tglupdate' => 'Tanggal Catat',
 			'nomorformulir' => 'Nomor Formulir',
 			'kd_desa' => 'Desa',
 			'kd_kecamatan' => 'Kecamatan',
@@ -86,15 +86,15 @@ class Keluarga extends CActiveRecord
 			'rt' => 'RT',
 			'rw' => 'RW',
 			'telponrumah' => 'Telpon Rumah',
-			'tks' => 'TKS',
+			'tks' => 'Petugas',
 			'nama' => 'Nama Kepala Keluarga',
 			'no_kk' => 'No Kartu Keluarga',
 			'kd_surveyor' => 'Kode Surveyor',
 			'tglsensus' => 'Tanggal Sensus',
 			'catatan' => 'Catatan',
-			'waktuupdate' => 'Waktu Update',
+			'waktuupdate' => 'Tanggal Update',
 			'kd_operator' => 'Operator',
-			'ip_client' => 'IP Client',
+			'ip_client' => 'IP Address',
 			);
 	}
 

@@ -4,6 +4,10 @@
 ?>
 <div class="col-xs-4">
 
+	<div class="alert <?php echo Kepindahan::model()->alert($data->status); ?>">
+		<?php echo Kepindahan::model()->status($data->status); ?>
+	</div>
+
 	<div class="panel panel-default panel-profile clearfix">
 		<div class="panel-heading col-md-12 col-sm-5">
 			<div class="row">
@@ -13,11 +17,18 @@
 					</center>
 				</div>
 				<div class="avatar-info col-md-12">
-					<h4>No. Surat SKTM <?php echo $data->no_sktm; ?></h4>
+					<h4>
+						<?php echo CHtml::link(CHtml::encode("No. Surat SKTM ".$data->no_sktm), array('view', 'id'=>$data->id_sktm)); ?>
+					</h4>
+					
 					<span><?php echo $data->nama_anak; ?></span>
 
-					<?php echo CHtml::link(CHtml::encode("Setujui SKTM"), array('view', 'id'=>$data->id_sktm),array('class'=>'btn btn-success')); ?>
-					<?php echo CHtml::link(CHtml::encode("Tolak SKTM"), array('view', 'id'=>$data->id_sktm),array('class'=>'btn btn-danger')); ?>
+					<?php if($data->status==0): ?>
+
+						<?php echo CHtml::link(CHtml::encode("Setujui SKTM"), array('terima', 'id'=>$data->id_sktm),array('class'=>'btn btn-success')); ?>
+						<?php echo CHtml::link(CHtml::encode("Tolak SKTM"), array('tolak', 'id'=>$data->id_sktm),array('class'=>'btn btn-danger')); ?>
+
+					<?php endif; ?>
 
 				</div>
 			</div>

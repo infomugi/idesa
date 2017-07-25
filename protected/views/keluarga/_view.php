@@ -6,6 +6,10 @@
 
 <div class="col-xs-4">
 
+	<div class="alert <?php echo Kepindahan::model()->alert($data->status); ?>">
+		<?php echo Kepindahan::model()->status($data->status); ?>
+	</div>
+
 	<div class="panel panel-default panel-profile clearfix">
 		<div class="panel-heading col-md-12 col-sm-5">
 			<div class="row">
@@ -15,12 +19,15 @@
 					</center>
 				</div>
 				<div class="avatar-info col-md-12">
-					<h4><?php echo $data->nama; ?></h4>
+					<h4>
+						<?php echo CHtml::link(CHtml::encode(ucwords($data->nama)), array('view', 'id'=>$data->kd_umpi)); ?>
+					</h4>
+
 					<span>No. Surat Pengantar KK <?php echo $data->kd_umpi; ?></span>
-
-					<?php echo CHtml::link(CHtml::encode("Setujui Pengantar KK"), array('view', 'id'=>$data->kd_umpi),array('class'=>'btn btn-success')); ?>
-					<?php echo CHtml::link(CHtml::encode("Tolak Pengantar KK"), array('view', 'id'=>$data->kd_umpi),array('class'=>'btn btn-danger')); ?>
-
+					<?php if($data->status==0): ?>
+						<?php echo CHtml::link(CHtml::encode("Setujui Pengantar KK"), array('terima', 'id'=>$data->kd_umpi),array('class'=>'btn btn-success')); ?>
+						<?php echo CHtml::link(CHtml::encode("Tolak Pengantar KK"), array('tolak', 'id'=>$data->kd_umpi),array('class'=>'btn btn-danger')); ?>
+					<?php endif; ?>
 				</div>
 			</div>
 		</div>

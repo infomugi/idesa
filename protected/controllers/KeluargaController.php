@@ -28,7 +28,7 @@ class KeluargaController extends Controller
 	{
 		return array(
 			array('allow',
-				'actions'=>array('tambah','update','view','delete','kelola','daftar','view','print','daftarverifikasi'),
+				'actions'=>array('tambah','update','view','delete','kelola','daftar','view','print','daftarverifikasi','terima','tolak','report'),
 				'users'=>array('@'),
 				'expression'=>'Yii::app()->user->getLevel()==1',
 				),
@@ -57,16 +57,6 @@ class KeluargaController extends Controller
 			'model'=>$this->loadModel($id),
 			));
 	}
-
-	public function actionPrint($id)
-	{
-		$this->layout = "print";
-		$model=Keluarga::model()->findByPk($id);
-		Activities::model()->my(YII::app()->user->id,"Print Data Keluarga tidak Bekerja, No KK : ".$model->no_kk,23,10,0,0);			
-		$this->render('print',array(
-			'model'=>$this->loadModel($id),
-			));
-	}	
 
 	/**
 	 * Creates a new model.
@@ -348,6 +338,40 @@ class KeluargaController extends Controller
 				)));
 
 		$this->render('index',array(
+			'dataProvider'=>$dataProvider,
+			));
+	}	
+
+	public function actionTerima($id)
+	{
+		$model=$this->loadModel($id);
+		$model->status=1;
+		if($model->save()){
+			$this->redirect(array('view','id'=>$model->kd_umpi));
+		}
+	}
+
+	public function actionTolak($id)
+	{
+		$model=$this->loadModel($id);
+		$model->status=2;
+		if($model->save()){
+			$this->redirect(array('view','id'=>$model->kd_umpi));
+		}
+	}		
+
+	public function actionPrint($id)
+	{
+		$this->layout = "print";
+		$this->render('print',array(
+			'model'=>$this->loadModel($id),
+			));
+	}	
+
+	public function actionReport()
+	{
+		$dataProvider=new CActiveDataProvider('Keluarga');
+		$this->render('report',array(
 			'dataProvider'=>$dataProvider,
 			));
 	}	
