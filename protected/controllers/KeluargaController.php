@@ -34,10 +34,17 @@ class KeluargaController extends Controller
 				),
 
 			array('allow',
-				'actions'=>array('tambah','update','view','delete','my','daftar','view','print','mydaftar'),
+				'actions'=>array('view','kelola','daftar','print','daftarverifikasi','terima','tolak','report'),
 				'users'=>array('@'),
 				'expression'=>'Yii::app()->user->getLevel()==2',
+				),
+
+			array('allow',
+				'actions'=>array('tambah','update','view','delete','kelola','daftar','view','print','daftarverifikasi','terima','tolak','report'),
+				'users'=>array('@'),
+				'expression'=>'Yii::app()->user->getLevel()==3 || Yii::app()->user->getLevel()==4',
 				),			
+
 			array('deny',
 				'users'=>array('*'),
 				),
@@ -58,33 +65,6 @@ class KeluargaController extends Controller
 			));
 	}
 
-	/**
-	 * Creates a new model.
-	 * If creation is successful, the browser will be redirected to the 'view' page.
-	 */
-	// public function actionTambah()
-	// {
-	// 	$model=new Keluarga;
-
-	// 	// Uncomment the following line if AJAX validation is needed
-	// 	// $this->performAjaxValidation($model);
-
-	// 	if(isset($_POST['Keluarga']))
-	// 	{
-	// 		$model->attributes=$_POST['Keluarga'];
-	// 		$model->kd_operator = YII::app()->user->id;
-	// 		$model->waktuupdate = date('Y-m-d h:i:s');
-	// 		$model->ip_client = Yii::app()->request->getUserHostAddress();
-	// 		if($model->save())
-	// 			Yii::app()->user->setFlash('Success', 'Data UMPI '.$model->kd_umpi.' berhasil ditambahkan.');
-	// 			$this->redirect(array('view','id'=>$model->kd_umpi));
-	// 	}
-
-	// 	$this->render('create',array(
-	// 			'model'=>$model,
-	// 		));
-
-	// }
 
 	public function actionTambah()
 	{
@@ -296,7 +276,7 @@ class KeluargaController extends Controller
 
 		}else{
 
-			if($model->kd_operator==YII::app()->user->id){
+			if($model->kd_operator==YII::app()->user->id || Yii::app()->user->getLevel()==2){
 
 				if($model===null)
 					throw new CHttpException(404,'Data yang anda cari kemungkinan telah dihapus.');

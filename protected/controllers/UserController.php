@@ -35,7 +35,6 @@ class UserController extends Controller
 			array('allow',
 				'actions'=>array('update','view','password','image'),
 				'users'=>array('@'),
-				'expression'=>'Yii::app()->user->getLevel()==2',
 				),			
 			array('deny',
 				'users'=>array('*'),
@@ -80,7 +79,7 @@ class UserController extends Controller
 			$model->update_date = date('Y-m-d');
 			$model->image = "avatar.png";
 			if($model->save())
-			$this->redirect(array('view','id'=>$model->id_user));
+				$this->redirect(array('view','id'=>$model->id_user));
 		}
 
 		$this->render('create',array(
@@ -109,7 +108,7 @@ class UserController extends Controller
 			if($model->save())
 				//$userid,$description,$activityid,$type,$point,$status
 				// Activities::model()->my(YII::app()->user->id,"Merubah Data Profile : ".$model->username,24,10,1,0);				
-			$this->redirect(array('view','id'=>$model->id_user));
+				$this->redirect(array('view','id'=>$model->id_user));
 		}
 
 		$this->render('update',array(
@@ -125,27 +124,27 @@ class UserController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-			if(isset($_POST['User']))
-			{
-				$model->attributes=$_POST['User'];
-				$tmp;
-				if(strlen(trim(CUploadedFile::getInstance($model,'image'))) > 0) 
-				{ 
-					$tmp=CUploadedFile::getInstance($model,'image'); 
-					$model->image=$model->username.'.'.$tmp->extensionName; 
-				}
-
-				if($model->save()){
-					if(strlen(trim($model->image)) > 0) 
-						$tmp->saveAs(Yii::getPathOfAlias('webroot').'/images/'.$model->image);
-					$this->redirect(array('view','id'=>$model->id_user));
-				}
+		if(isset($_POST['User']))
+		{
+			$model->attributes=$_POST['User'];
+			$tmp;
+			if(strlen(trim(CUploadedFile::getInstance($model,'image'))) > 0) 
+			{ 
+				$tmp=CUploadedFile::getInstance($model,'image'); 
+				$model->image=$model->username.'.'.$tmp->extensionName; 
 			}
 
-			$this->render('image',array(
-				'model'=>$model,
-				));
-		}	
+			if($model->save()){
+				if(strlen(trim($model->image)) > 0) 
+					$tmp->saveAs(Yii::getPathOfAlias('webroot').'/images/'.$model->image);
+				$this->redirect(array('view','id'=>$model->id_user));
+			}
+		}
+
+		$this->render('image',array(
+			'model'=>$model,
+			));
+	}	
 
 	/**
 	 * Deletes a particular model.

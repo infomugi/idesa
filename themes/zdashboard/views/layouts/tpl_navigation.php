@@ -162,81 +162,109 @@
 
 }elseif(YII::app()->user->getLevel()==2){
 
- $this->widget('zii.widgets.CMenu',array(
-  'htmlOptions'=>array('class'=>'nav navbar-nav nav-pills nav-center navbar-left'),
-  'submenuHtmlOptions'=>array('class'=>'dropdown-menu'),
-  'itemCssClass'=>'item-test',
-  'encodeLabel'=>false,
-  'items'=>array(
+  $this->widget('zii.widgets.CMenu',array(
+    'htmlOptions'=>array('class'=>'nav navbar-nav nav-pills nav-center navbar-left'),
+    'submenuHtmlOptions'=>array('class'=>'dropdown-menu'),
+    'itemCssClass'=>'item-test',
+    'encodeLabel'=>false,
+    'items'=>array(
 
+     array('label'=>'Beranda', 'url'=>array('site/index')),
 
-    array('label'=>'Laporan <span class="caret"></span>', 'url'=>'#','itemOptions'=>array('class'=>'dropdown','tabindex'=>"-1"),'linkOptions'=>array('class'=>'dropdown-toggle','data-toggle'=>"dropdown"), 
+     array('label'=>'Verifikasi Surat <span class="caret"></span>', 'url'=>'#','itemOptions'=>array('class'=>'dropdown','tabindex'=>"-1"),'linkOptions'=>array('class'=>'dropdown-toggle','data-toggle'=>"dropdown"), 
       'items'=>array(
+        array('label'=>'Approve Surat SKTM','url'=>array('/sktm/daftarverifikasi')),
+        array('label'=>'Approve Surat Pengantar KK','url'=>array('/keluarga/daftarverifikasi')),
+        array('label'=>'Approve Surat Keterangan Pindah','url'=>array('/kepindahan/daftarverifikasi')),
+        ),'visible'=>Yii::app()->user->getLevel()==2),     
 
-        array('label'=>'Perusahaan Per Kecamatan','url'=>array('/kecamatan/perusahaan')),
-        array('label'=>'Perusahaan Per Industri','url'=>array('/industri/perusahaan')),
-        array('label'=>'Perusahaan Per Serikat','url'=>array('/serikat/perusahaan')),
-
-        ),'visible'=>Yii::app()->user->getLevel()==2),    
-
-    array('label'=>'PP Perusahaan <span class="caret"></span>', 'url'=>'#','itemOptions'=>array('class'=>'dropdown','tabindex'=>"-1"),'linkOptions'=>array('class'=>'dropdown-toggle','data-toggle'=>"dropdown"), 
+     array('label'=>'Laporan <span class="caret"></span>', 'url'=>'#','itemOptions'=>array('class'=>'dropdown','tabindex'=>"-1"),'linkOptions'=>array('class'=>'dropdown-toggle','data-toggle'=>"dropdown"), 
       'items'=>array(
-       array('label'=>'Ada PP','url'=>array('perusahaan/reportnot', 'kriteria'=>"perusahaan_nomor_sk", 'search'=>"''")),
-       array('label'=>'Tidak Ada PP','url'=>array('perusahaan/report', 'kriteria'=>"perusahaan_nomor_sk", 'search'=>"''")),
+        array('label'=>'Rekapitulasi Surat SKTM','url'=>array('/sktm/report')),
+        array('label'=>'Rekapitulasi Surat Pengantar KK','url'=>array('/keluarga/report')),
+        array('label'=>'Rekapitulasi Surat Keterangan Pindah','url'=>array('/kepindahan/report')),
+        ),'visible'=>Yii::app()->user->getLevel()==2),     
 
-       ),'visible'=>Yii::app()->user->getLevel()==2),    
+     array('label'=>'Profile', 'url'=>array('/user/view','id'=>YII::app()->user->id)),                                            
 
-    array('label'=>'Serikat Pekerja <span class="caret"></span>', 'url'=>'#','itemOptions'=>array('class'=>'dropdown','tabindex'=>"-1"),'linkOptions'=>array('class'=>'dropdown-toggle','data-toggle'=>"dropdown"), 
+     ),
+    )); 
+
+}elseif(YII::app()->user->getLevel()==3){
+
+  $this->widget('zii.widgets.CMenu',array(
+    'htmlOptions'=>array('class'=>'nav navbar-nav nav-pills nav-center navbar-left'),
+    'submenuHtmlOptions'=>array('class'=>'dropdown-menu'),
+    'itemCssClass'=>'item-test',
+    'encodeLabel'=>false,
+    'items'=>array(
+
+     array('label'=>'Beranda', 'url'=>array('site/index')),
+
+     array('label'=>'Pengelolaan Data <span class="caret"></span>', 'url'=>'#','itemOptions'=>array('class'=>'dropdown','tabindex'=>"-1"),'linkOptions'=>array('class'=>'dropdown-toggle','data-toggle'=>"dropdown"), 
       'items'=>array(
-       array('label'=>'Ada Serikat','url'=>array('perusahaan/reportnot', 'kriteria'=>"serikat_nama", 'search'=>"''")),
-       array('label'=>'Tidak Ada Serikat','url'=>array('perusahaan/report', 'kriteria'=>"serikat_nama", 'search'=>"''")),
+        array('label'=>'Surat SKTM','url'=>array('/sktm/kelola')),
+        array('label'=>'Surat Pengantar KK','url'=>array('/keluarga/kelola')),
+        array('label'=>'Surat Keterangan Pindah','url'=>array('/kepindahan/kelola')),
+        ),'visible'=>Yii::app()->user->getLevel()==3),   
 
-       ),'visible'=>Yii::app()->user->getLevel()==2), 
-
-    array('label'=>'Bipartit <span class="caret"></span>', 'url'=>'#','itemOptions'=>array('class'=>'dropdown','tabindex'=>"-1"),'linkOptions'=>array('class'=>'dropdown-toggle','data-toggle'=>"dropdown"), 
+     array('label'=>'Pengantar KK <span class="caret"></span>', 'url'=>'#','itemOptions'=>array('class'=>'dropdown','tabindex'=>"-1"),'linkOptions'=>array('class'=>'dropdown-toggle','data-toggle'=>"dropdown"), 
       'items'=>array(
-       array('label'=>'Ada Bipartit','url'=>array('perusahaan/reportnot', 'kriteria'=>"bipartit_nomor", 'search'=>"''")),
-       array('label'=>'Tidak Ada Bipartit','url'=>array('perusahaan/report', 'kriteria'=>"bipartit_nomor", 'search'=>"''")),
+        array('label'=>'Kelola','url'=>array('/keluarga/kelola')),
+        ),'visible'=>Yii::app()->user->getLevel()==3),  
 
-       ),'visible'=>Yii::app()->user->getLevel()==2),   
-
-    array('label'=>'Kontak Perusahaan <span class="caret"></span>', 'url'=>'#','itemOptions'=>array('class'=>'dropdown','tabindex'=>"-1"),'linkOptions'=>array('class'=>'dropdown-toggle','data-toggle'=>"dropdown"), 
+     array('label'=>'Surat Pindah <span class="caret"></span>', 'url'=>'#','itemOptions'=>array('class'=>'dropdown','tabindex'=>"-1"),'linkOptions'=>array('class'=>'dropdown-toggle','data-toggle'=>"dropdown"), 
       'items'=>array(
-       array('label'=>'Ada Kontak','url'=>array('perusahaan/reportnot', 'kriteria'=>"pimpinan", 'search'=>"''")),
-       array('label'=>'Tidak Ada Kontak','url'=>array('perusahaan/report', 'kriteria'=>"pimpinan", 'search'=>"''")),
+        array('label'=>'Kelola','url'=>array('/kepindahan/kelola')),
+        ),'visible'=>Yii::app()->user->getLevel()==3),    
 
-       ),'visible'=>Yii::app()->user->getLevel()==2),                      
-
-    array('label'=>'Kelola Data <span class="caret"></span>', 'url'=>'#','itemOptions'=>array('class'=>'dropdown','tabindex'=>"-1"),'linkOptions'=>array('class'=>'dropdown-toggle','data-toggle'=>"dropdown"), 
+     array('label'=>'SKTM <span class="caret"></span>', 'url'=>'#','itemOptions'=>array('class'=>'dropdown','tabindex'=>"-1"),'linkOptions'=>array('class'=>'dropdown-toggle','data-toggle'=>"dropdown"), 
       'items'=>array(
+        array('label'=>'Kelola','url'=>array('/sktm/kelola')),
+        ),'visible'=>Yii::app()->user->getLevel()==3),  
 
-        array('label'=>'<span class="badge badge-warning">'.Yii::app()->db->createCommand("SELECT COUNT(id) FROM perusahaan")->queryScalar().'</span> Perusahaan','url'=>array('/perusahaan/admin')),
-        array('label'=>'<span class="badge badge-warning">'.Yii::app()->db->createCommand("SELECT COUNT(id) FROM industri")->queryScalar().'</span> Industri','url'=>array('/industri/kelola')),
-        array('label'=>'<span class="badge badge-warning">'.Yii::app()->db->createCommand("SELECT COUNT(id) FROM serikat")->queryScalar().'</span> Serikat','url'=>array('/serikat/kelola')),
-        array('label'=>'<span class="badge badge-warning">'.Yii::app()->db->createCommand("SELECT COUNT(id) FROM kecamatan")->queryScalar().'</span> Kecamatan','url'=>array('/kecamatan/kelola')),
+     array('label'=>'Profile', 'url'=>array('/user/view','id'=>YII::app()->user->id)),                                            
 
-        ),'visible'=>Yii::app()->user->getLevel()==2),  
-
-    array('label'=>'Profile Petugas', 'url'=>array('/user/view','id'=>YII::app()->user->id)),
-    array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
-    ),
-  )); 
+     ),
+    )); 
 
 }else{
 
- $this->widget('zii.widgets.CMenu',array(
-  'htmlOptions'=>array('class'=>'nav'),
-  'submenuHtmlOptions'=>array('class'=>'dropdown-menu'),
-  'itemCssClass'=>'item-test',
-  'encodeLabel'=>false,
-  'items'=>array(
+  $this->widget('zii.widgets.CMenu',array(
+    'htmlOptions'=>array('class'=>'nav navbar-nav nav-pills nav-center navbar-left'),
+    'submenuHtmlOptions'=>array('class'=>'dropdown-menu'),
+    'itemCssClass'=>'item-test',
+    'encodeLabel'=>false,
+    'items'=>array(
 
-    array('label'=>'Isi Data', 'url'=>array('/umpi/tambah')),
-    array('label'=>'Kelola Data', 'url'=>array('/umpi/my')),
-    array('label'=>'Profile', 'url'=>array('/user/view','id'=>YII::app()->user->id)),
-    array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
-    ),
-  )); 
+     array('label'=>'Beranda', 'url'=>array('site/index')),
+
+     array('label'=>'Pelayanan Data <span class="caret"></span>', 'url'=>'#','itemOptions'=>array('class'=>'dropdown','tabindex'=>"-1"),'linkOptions'=>array('class'=>'dropdown-toggle','data-toggle'=>"dropdown"), 
+      'items'=>array(
+        array('label'=>'Surat SKTM','url'=>array('/sktm/daftar')),
+        array('label'=>'Surat Pengantar KK','url'=>array('/keluarga/daftar')),
+        array('label'=>'Surat Keterangan Pindah','url'=>array('/kepindahan/daftar')),
+        ),'visible'=>Yii::app()->user->getLevel()==4),      
+
+     array('label'=>'Pengantar KK <span class="caret"></span>', 'url'=>'#','itemOptions'=>array('class'=>'dropdown','tabindex'=>"-1"),'linkOptions'=>array('class'=>'dropdown-toggle','data-toggle'=>"dropdown"), 
+      'items'=>array(
+        array('label'=>'Tambah','url'=>array('/keluarga/tambah')),
+        ),'visible'=>Yii::app()->user->getLevel()==4),  
+
+     array('label'=>'Surat Pindah <span class="caret"></span>', 'url'=>'#','itemOptions'=>array('class'=>'dropdown','tabindex'=>"-1"),'linkOptions'=>array('class'=>'dropdown-toggle','data-toggle'=>"dropdown"), 
+      'items'=>array(
+        array('label'=>'Tambah','url'=>array('/kepindahan/tambah')),
+        ),'visible'=>Yii::app()->user->getLevel()==4),    
+
+     array('label'=>'SKTM <span class="caret"></span>', 'url'=>'#','itemOptions'=>array('class'=>'dropdown','tabindex'=>"-1"),'linkOptions'=>array('class'=>'dropdown-toggle','data-toggle'=>"dropdown"), 
+      'items'=>array(
+        array('label'=>'Tambah','url'=>array('/sktm/tambah')),
+        ),'visible'=>Yii::app()->user->getLevel()==4),  
+
+     array('label'=>'Profile', 'url'=>array('/user/view','id'=>YII::app()->user->id)),                                            
+
+     ),
+    )); 
 
 }
 ?>

@@ -1,6 +1,6 @@
 <?php
 
-class SktmController extends Controller
+class KepindahanDetailController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -28,20 +28,9 @@ class SktmController extends Controller
 	{
 		return array(
 			array('allow',
-				'actions'=>array('tambah','update','view','delete','kelola','daftar','view','daftarverifikasi','terima','tolak','print','report'),
+				'actions'=>array('tambah','update','view','delete','kelola','daftar','view'),
 				'users'=>array('@'),
-				'expression'=>'Yii::app()->user->getLevel()==1',
 				),
-			array('allow',
-				'actions'=>array('view','kelola','daftar','view','daftarverifikasi','terima','tolak','print','report'),
-				'users'=>array('@'),
-				'expression'=>'Yii::app()->user->getLevel()==2',
-				),		
-			array('allow',
-				'actions'=>array('tambah','update','view','delete','kelola','daftar','view','print','report'),
-				'users'=>array('@'),
-				'expression'=>'Yii::app()->user->getLevel()==3 || Yii::app()->user->getLevel()==4',
-				),											
 			array('deny',
 				'users'=>array('*'),
 				),
@@ -63,21 +52,20 @@ class SktmController extends Controller
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionTambah()
+	public function actionTambah($id)
 	{
-		$model=new Sktm;
+		$model=new KepindahanDetail;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Sktm']))
+		if(isset($_POST['KepindahanDetail']))
 		{
-			$model->attributes=$_POST['Sktm'];
-			$model->tanggal_input = date('Y-m-d h:i:s');
-			$model->petugas_id = YII::app()->user->id;
-			$model->status=0;
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id_sktm));
+			$model->attributes=$_POST['KepindahanDetail'];
+			$model->kepindahan_id = $id;
+			if($model->save()){
+				$this->redirect(array('kepindahan/view','id'=>$model->kepindahan_id));
+			}
 		}
 
 		$this->render('create',array(
@@ -97,11 +85,11 @@ class SktmController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Sktm']))
+		if(isset($_POST['KepindahanDetail']))
 		{
-			$model->attributes=$_POST['Sktm'];
+			$model->attributes=$_POST['KepindahanDetail'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id_sktm));
+				$this->redirect(array('view','id'=>$model->id_kepindahan_detail));
 		}
 
 		$this->render('update',array(
@@ -128,7 +116,7 @@ class SktmController extends Controller
 	 */
 	public function actionDaftar()
 	{
-		$dataProvider=new CActiveDataProvider('Sktm');
+		$dataProvider=new CActiveDataProvider('KepindahanDetail');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 			));
@@ -139,10 +127,10 @@ class SktmController extends Controller
 	 */
 	public function actionKelola()
 	{
-		$model=new Sktm('search');
+		$model=new KepindahanDetail('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Sktm']))
-			$model->attributes=$_GET['Sktm'];
+		if(isset($_GET['KepindahanDetail']))
+			$model->attributes=$_GET['KepindahanDetail'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -153,12 +141,12 @@ class SktmController extends Controller
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
 	 * @param integer $id the ID of the model to be loaded
-	 * @return Sktm the loaded model
+	 * @return KepindahanDetail the loaded model
 	 * @throws CHttpException
 	 */
 	public function loadModel($id)
 	{
-		$model=Sktm::model()->findByPk($id);
+		$model=KepindahanDetail::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -166,65 +154,14 @@ class SktmController extends Controller
 
 	/**
 	 * Performs the AJAX validation.
-	 * @param Sktm $model the model to be validated
+	 * @param KepindahanDetail $model the model to be validated
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='sktm-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='kepindahan-detail-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
 	}
-
-	public function actionDaftarVerifikasi()
-	{
-		$dataProvider=new CActiveDataProvider('Sktm',array(
-			'criteria'=>array(
-				'condition'=>'status=0',
-				'order'=>'id_sktm DESC'
-				),
-			'pagination'=>array(
-				'pageSize'=>'12',
-				)));
-
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
-			));
-	}		
-
-	public function actionTerima($id)
-	{
-		$model=$this->loadModel($id);
-		$model->status=1;
-		if($model->save()){
-			$this->redirect(array('view','id'=>$model->id_sktm));
-		}
-	}
-
-	public function actionTolak($id)
-	{
-		$model=$this->loadModel($id);
-		$model->status=2;
-		if($model->save()){
-			$this->redirect(array('view','id'=>$model->id_sktm));
-		}
-	}		
-
-	public function actionPrint($id)
-	{
-		$this->layout = "print";
-		$this->render('print',array(
-			'model'=>$this->loadModel($id),
-			));
-	}	
-
-	public function actionReport()
-	{
-		$dataProvider=new CActiveDataProvider('Sktm');
-		$this->render('report',array(
-			'dataProvider'=>$dataProvider,
-			));
-	}		
-
 }

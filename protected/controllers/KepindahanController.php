@@ -32,6 +32,21 @@ class KepindahanController extends Controller
 				'users'=>array('@'),
 				'expression'=>'Yii::app()->user->getLevel()==1',
 				),
+			array('allow',
+				'actions'=>array('view','kelola','daftar','view','desa','daftarverifikasi','terima','tolak','print','report'),
+				'users'=>array('@'),
+				'expression'=>'Yii::app()->user->getLevel()==2',
+				),	
+			array('allow',
+				'actions'=>array('tambah','update','view','delete','kelola','daftar','view','desa','loadKecamatan','loadIdKota','loadKota','loadIdProvinsi','loadProvinsi','print','kabkota','kecamatan','loaddesa','report'),
+				'users'=>array('@'),
+				'expression'=>'Yii::app()->user->getLevel()==3',
+				),	
+			array('allow',
+				'actions'=>array('tambah','update','view','delete','kelola','daftar','view','desa','loadKecamatan','loadIdKota','loadKota','loadIdProvinsi','loadProvinsi','print','kabkota','kecamatan','loaddesa','report'),
+				'users'=>array('@'),
+				'expression'=>'Yii::app()->user->getLevel()==4',
+				),											
 			array('deny',
 				'users'=>array('*'),
 				),
@@ -44,8 +59,17 @@ class KepindahanController extends Controller
 	 */
 	public function actionView($id)
 	{
+		$dataProvider=new CActiveDataProvider('KepindahanDetail',array(
+			'criteria'=>array(
+				'order'=>'sdrt_id DESC'
+				),
+			'pagination'=>array(
+				'pageSize'=>'12',
+				)));
+
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
+			'dataProvider'=>$dataProvider,
 			));
 	}
 

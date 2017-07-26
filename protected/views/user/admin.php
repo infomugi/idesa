@@ -41,8 +41,8 @@ $this->pageTitle='Kelola User';
 						'email',
 						// array('name'=>'bagian','value'=>'$data->Kecamatan->nama'),
 						'handphone',
-						'email',
-						array('header'=>'level','value'=>'$data->level'),
+						// 'email',
+						array('header'=>'level','value'=>'User::model()->level($data->level)'),
 
 						array(
 							'header'=>'Action',

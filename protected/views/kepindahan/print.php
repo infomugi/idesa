@@ -44,17 +44,17 @@ $this->pageTitle='Detail Pengantar Surat Pindah';
 		<div class="jadwal">
 			<table>
 				<tr>
-					<td width="28%">No. KK</td>
+					<td width="28%">1. No. KK</td>
 					<td width="2%">:</td>
 					<td width="70%"> <b><?php echo strtoupper($model->no_kk); ?></b></td>
 				</tr>
 				<tr>
-					<td width="28%">Nama Kepala Keluarga</td>
+					<td width="28%">2. Nama Kepala Keluarga</td>
 					<td width="2%">:</td>
 					<td width="70%"> <?php echo $model->nama_kk; ?></td>
 				</tr>	
 				<tr>
-					<td width="28%">Alamat</td>
+					<td width="28%">3. Alamat</td>
 					<td width="2%">:</td>
 					<td width="70%"> <?php echo $model->alamat; ?></td>
 				</tr>
@@ -84,7 +84,7 @@ $this->pageTitle='Detail Pengantar Surat Pindah';
 		<div class="jadwal">
 			<table>
 				<tr>
-					<td width="28%">Alasan Pindah</td>
+					<td width="28%">1. Alasan Pindah</td>
 					<td width="2%">:</td>
 					<td width="70%"> 
 						<?php echo $model->alasan_pindah; ?>
@@ -99,7 +99,7 @@ $this->pageTitle='Detail Pengantar Surat Pindah';
 					</td>
 				</tr>
 				<tr>
-					<td width="28%">Alamat Tujuan</td>
+					<td width="28%">2. Alamat Tujuan</td>
 					<td width="2%">:</td>
 					<td width="70%"> 
 						<b><?php echo $model->alamat_tujuan; ?></b>
@@ -120,42 +120,77 @@ $this->pageTitle='Detail Pengantar Surat Pindah';
 					<td width="70%">Kode Pos : </td>
 				</tr>	
 				<tr>
-					<td width="28%">Jenis Kepindahan</td>
+					<td width="28%">3. Jenis Kepindahan</td>
 					<td width="2%">:</td>
 					<td width="70%"> 
-						<?php echo $model->jenis_kepindahan; ?>
+						<div style="padding:8px;border:1px solid #000;width:10px"><?php echo $model->jenis_kepindahan; ?></div>
 					</td>
 				</tr>
 				<tr>
 					<td width="28%"></td>
 					<td width="2%"></td>
 					<td width="70%"> 
-						1. Kepala Keluarga &ensp; &ensp; &ensp; &ensp; &ensp; &ensp;  &ensp; &ensp; &ensp; &ensp; 2. Kepala & Seluruh Anggota Keluarga  <BR>
-						3. Kepala & Sebagian Anggota &ensp; &nbsp; &ensp; &ensp; &ensp; 4. Anggota Keluarga
+						1. Kepala Keluarga &ensp; &ensp; &ensp; &ensp; &ensp; &ensp;  &ensp; &ensp; &ensp; &ensp;2. Kepala & Seluruh Anggota Keluarga  <BR>
+						3. Kepala & Sebagian Anggota &ensp; &nbsp; &ensp; &ensp; 4. Anggota Keluarga
 					</td>
 				</tr>
+				<tr>
+					<td width="28%">4. Status KK bagi yang tidak Pindah</td>
+					<td width="2%">:</td>
+					<td width="70%"> 
+						<div style="padding:8px;border:1px solid #000;width:10px"><?php echo $model->status_kk_yang_tidak_pindah; ?></div>
+					</td>
+				</tr>
+				<tr>
+					<td width="28%"></td>
+					<td width="2%"></td>
+					<td width="70%"> 
+						1. Tetap &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; 2. KK Baru
+					</td>
+				</tr>	
+
+				<tr>
+					<td width="28%">5. Status KK bagi yang Pindah</td>
+					<td width="2%">:</td>
+					<td width="70%"> 
+						<div style="padding:8px;border:1px solid #000;width:10px"><?php echo $model->status_kk_pindah; ?></div>
+					</td>
+				</tr>
+				<tr>;width:30px
+					<td width="28%"></td>
+					<td width="2%"></td>
+					<td width="70%"> 
+						1. Numpang KK &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; 2. Membuat KK Baru
+					</td>
+				</tr>	
+
+				<tr>
+					<td width="28%">6. Keluarga yang Pindah</td>
+					<td width="2%">:</td>
+					<td width="70%"> 
+					</td>
+				</tr>											
+
 
 			</table>
 		</div>
 	</div>
 </div>
-<BR>
+<BR> <BR> <BR> <BR> <BR> <BR> <BR> <BR> <BR> <BR>
+	<BR> <BR> <BR> <BR> <BR> <BR> <BR> <BR> <BR> <BR>
+		<div class="kotak">
+			<div class="kiri">
 
-	<BR>
-		<BR>
-			<div class="kotak">
-				<div class="kiri">
+			</div>
+			<div class="kanan" style="font-size:18px;line-height:20px;text-align: left;">
 
-				</div>
-				<div class="kanan" style="font-size:18px;line-height:20px;text-align: left;">
-
-					Bojongkunci, <?php echo $model->tanggal_buat;?>
-					<BR>
-						KEPALA DESA BOJONGKUNCI <BR>
-						<BR> <BR> <BR> <BR> <BR> <BR> 
-							<b><u>ECEP BUDIMAN</u></b><BR>
-						</div>
+				Bojongkunci, <?php echo $model->tanggal_buat;?>
+				<BR>
+					KEPALA DESA BOJONGKUNCI <BR>
+					<BR> <BR> <BR> <BR> <BR> <BR> 
+						<b><u>ECEP BUDIMAN</u></b><BR>
 					</div>
+				</div>
 
 
 

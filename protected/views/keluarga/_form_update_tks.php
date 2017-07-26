@@ -78,8 +78,7 @@
 				<TR>
 					<TD><b>Kecamatan</b></TD>
 					<TD>
-
-						<input type="text" value="<?PHP echo User::model()->kecamatan(YII::app()->user->record->bagian); ?>" class="form-control" disabled="true">								
+						
 					</TD>
 					<TD>
 						<?php echo $form->label($model,'alamat'); ?>
@@ -94,8 +93,8 @@
 						</TD>
 						<TD>
 							<?php echo $form->dropDownList($model, "kd_desa",
-								CHtml::listData(Desa::model()->findAll(array('condition'=>'kd_kecamatan='.YII::app()->user->record->bagian.'','order'=>'nama ASC')),
-									'kd_desa', 'nama'
+								CHtml::listData(Desa::model()->findAll(array('condition'=>'','order'=>'nama ASC')),
+									'id', 'nama'
 									),
 								array("empty"=>"-- Pilih Desa --", 'class'=>'form-control')
 								); ?> 
@@ -143,11 +142,11 @@
 									)
 								),
 
-							// 'tempatlahir'=>array(
-							// 	'type'=>'text',
-							// 	'class'=>'form-control',
-							// 	'placeholder'=>'Tempat Lahir',
-							// 	),										
+							'tempatlahir'=>array(
+								'type'=>'text',
+								'class'=>'form-control',
+								'placeholder'=>'Tempat Lahir',
+								),										
 
 							'tgllahir'=>array(
 										// 'type'=>'text',
@@ -168,7 +167,6 @@
 												'showButtonPanel'=>true,
 												'changeMonth'=>true,
 												'changeYear'=>true,
-												'yearRange'=>'1970:2000',
 												'defaultDate'=>'+1w',
 												),),					
 

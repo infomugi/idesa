@@ -78,9 +78,39 @@ $this->pageTitle='Detail Kepindahan';
 													),
 													)); ?>
 
-												</div>
 
-												<STYLE>
-													th{width:250px;}
-												</STYLE>
+											<?php echo CHtml::link('<i class="fa fa-plus"></i> Tambah Anggota Keluarga', 
+												array('kepindahandetail/tambah', 'id'=>$model->id_kepindahan,
+													), array('class' => 'btn btn-info pull-right btn-sm btn-flat', 'title'=>'Tambah Anggota Keluarga'));
+													?>	
+
+													<?php $this->widget('zii.widgets.grid.CGridView', array(
+														'id'=>'kepindahan-detail-grid',
+														'dataProvider'=>$dataProvider,
+														'summaryText'=>'',
+														// 'filter'=>$model,
+														'itemsCssClass' => 'table table-bordered table-striped dataTable table-hover',
+														'columns'=>array(
+
+															'nik',
+															'nama_lengkap',
+															'masa_berlaku_ktp',
+															array('name'=>'masa_berlaku_ktp','value'=>'kepindahandetail::model()->masaberlaku($data->masa_berlaku_ktp)'),
+															array('name'=>'sdrt_id','value'=>'$data->Sdrt->nama'),
+
+															array(
+																'class' => 'CButtonColumn',
+																'template' => '{delete}',
+																'class'=>'CButtonColumn',
+																'deleteButtonUrl' => 'Yii::app()->controller->createUrl("kepindahandetail/delete",array("id"=>$data->id_kepindahan_detail))',
+																),	
+
+															),
+															)); ?>
+
+														</div>
+
+														<STYLE>
+															th{width:250px;}
+														</STYLE>
 
