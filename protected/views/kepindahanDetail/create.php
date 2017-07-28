@@ -7,7 +7,7 @@ $this->breadcrumbs=array(
 	'Tambah',
 	);
 
-	$this->pageTitle='Tambah KepindahanDetail';
-	?>
+$this->pageTitle='Tambah Anggota';
+?>
 
-	<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

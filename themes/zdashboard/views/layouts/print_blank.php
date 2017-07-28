@@ -64,31 +64,12 @@
 
 <body class="">
   <div id="invoice" style="width: 800px;text-align: center;padding: 10px;height:820px">
-    <div class="header-kiri">
-      <center>
-        <img src="<?php echo Yii::app()->baseUrl; ?>/images/logo-white.png" style="width:140px;"/>
-      </center>
+
+    <div class="content">
+      <?php echo $content; ?>
     </div>
-    <div class="header-kanan">
 
-      <div class="konten-header-kanan">
-        <H2>PEMERINTAH KABUPATEN BANDUNG</H2>
-        <H3>KECAMATAN PAMEUNGPEUK</H3>
-        <H1>DESA BOJONGKUNCI</H1>
-        <div class="info">
-          Jl. Tanjung Hilir No. Kp. Sukmanah Rt.03/03 Pameungpeuk Bandung Kode Pos 4376
-        </div>
-      </div>
-
-    </div>
-  </center>  
-
-  <img src="<?php echo Yii::app()->baseUrl; ?>/images/line.png" style="margin-top:-15px;"/>
-  <div class="content">
-    <?php echo $content; ?>
   </div>
-
-</div>
 </body>
 </html>
 

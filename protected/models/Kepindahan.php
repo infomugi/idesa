@@ -46,6 +46,7 @@ class Kepindahan extends CActiveRecord
 			array('no_kk', 'length', 'max'=>25),
 			array('nama_kk', 'length', 'max'=>50),
 			array('kode_pos', 'length', 'max'=>6),
+			array('no_kk', 'unique'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id_kepindahan, tanggal_buat, petugas_id, no_kk, nama_kk, alamat, kode_pos, alasan_pindah, alamat_tujuan, provinsi_id, kabkota_id, kecamatan_id, desa_id, jenis_kepindahan, status_kk_yang_tidak_pindah, status_kk_pindah, status', 'safe', 'on'=>'search'),

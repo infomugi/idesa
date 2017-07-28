@@ -94,7 +94,6 @@ $this->pageTitle='Detail Kepindahan';
 
 															'nik',
 															'nama_lengkap',
-															'masa_berlaku_ktp',
 															array('name'=>'masa_berlaku_ktp','value'=>'kepindahandetail::model()->masaberlaku($data->masa_berlaku_ktp)'),
 															array('name'=>'sdrt_id','value'=>'$data->Sdrt->nama'),
 

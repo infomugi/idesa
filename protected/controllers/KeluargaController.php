@@ -342,7 +342,7 @@ class KeluargaController extends Controller
 
 	public function actionPrint($id)
 	{
-		$this->layout = "print";
+		$this->layout = "print_landscape";
 		$this->render('print',array(
 			'model'=>$this->loadModel($id),
 			));

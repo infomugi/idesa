@@ -61,6 +61,7 @@ class KepindahanController extends Controller
 	{
 		$dataProvider=new CActiveDataProvider('KepindahanDetail',array(
 			'criteria'=>array(
+				'condition'=>'kepindahan_id = '.$id.'',
 				'order'=>'sdrt_id DESC'
 				),
 			'pagination'=>array(
@@ -307,10 +308,20 @@ class KepindahanController extends Controller
 
 	public function actionPrint($id)
 	{
-		$this->layout = "print";
+		$this->layout = "print_blank";
+		$dataProvider=new CActiveDataProvider('KepindahanDetail',array(
+			'criteria'=>array(
+				'condition'=>'kepindahan_id = '.$id.'',
+				'order'=>'sdrt_id DESC'
+				),
+			'pagination'=>array(
+				'pageSize'=>'12',
+				)));
+
 		$this->render('print',array(
 			'model'=>$this->loadModel($id),
-			));
+			'dataProvider'=>$dataProvider,
+			));		
 	}	
 
 	public function actionKabKota()

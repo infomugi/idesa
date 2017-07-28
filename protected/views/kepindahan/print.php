@@ -10,20 +10,18 @@ $this->breadcrumbs=array(
 $this->pageTitle='Detail Pengantar Surat Pindah';
 
 ?>
-<!-- 
-<div class="kotak">
-	<div class="kiri">
 
-		<p>PEMERINTAH PROVINSI JAWA BARAT</p>
-		<p>PEMERINTAH KABUPATEN BANDUNG</p>
-		<p>KECAMATAN : 14 PAMEUNGPEUK</p>
-		<p>DESA / KELURAHAN : 2004 BOJONGKUNCI</p>
+<div class="kotak" style="font-size:14px;text-align: left;line-height:10px;font-weight:700;">
 
-	</div>
-	<div class="kanan">
 
-	</div>
--->
+	<p>PEMERINTAH PROVINSI JAWA BARAT</p>
+	<p>PEMERINTAH KABUPATEN BANDUNG</p>
+	<p>KECAMATAN &ensp; &ensp; &ensp; &ensp; &ensp; : 14 PAMEUNGPEUK</p>
+	<p>DESA / KELURAHAN &ensp; : 2004 BOJONGKUNCI</p>
+
+
+</div>
+
 
 <div class="kotak">
 	<div class="line3"></div>
@@ -156,7 +154,7 @@ $this->pageTitle='Detail Pengantar Surat Pindah';
 						<div style="padding:8px;border:1px solid #000;width:10px"><?php echo $model->status_kk_pindah; ?></div>
 					</td>
 				</tr>
-				<tr>;width:30px
+				<tr>
 					<td width="28%"></td>
 					<td width="2%"></td>
 					<td width="70%"> 
@@ -178,19 +176,58 @@ $this->pageTitle='Detail Pengantar Surat Pindah';
 </div>
 <BR> <BR> <BR> <BR> <BR> <BR> <BR> <BR> <BR> <BR>
 	<BR> <BR> <BR> <BR> <BR> <BR> <BR> <BR> <BR> <BR>
-		<div class="kotak">
-			<div class="kiri">
 
-			</div>
-			<div class="kanan" style="font-size:18px;line-height:20px;text-align: left;">
+		<?php $this->widget('zii.widgets.grid.CGridView', array(
+			'id'=>'kepindahan-detail-grid',
+			'dataProvider'=>$dataProvider,
+			'summaryText'=>'',
+			// 'filter'=>$model,
+			'itemsCssClass' => 'gridtable',
+			'columns'=>array(
 
-				Bojongkunci, <?php echo $model->tanggal_buat;?>
-				<BR>
-					KEPALA DESA BOJONGKUNCI <BR>
-					<BR> <BR> <BR> <BR> <BR> <BR> 
-						<b><u>ECEP BUDIMAN</u></b><BR>
-					</div>
-				</div>
+				array('header'=>'NIK','value'=>'$data->nik'),
+				array('header'=>'Nama Lengkap','value'=>'$data->nama_lengkap'),
+				array('header'=>'NIK','value'=>'$data->masa_berlaku_ktp'),
+				array('header'=>'SHDK','value'=>'$data->Sdrt->nama'),
+
+
+				),
+				)); ?>
+
+				<center>
+					<div class="kotak" style="font-size:14px;line-height:20px;text-align: center;">
+						<div class="kiri" style="font-size:14px;line-height:20px;text-align: center;">
+							<BR> <BR> <BR> <BR> 
+								Pemohon,
+								<BR> <BR> <BR> <BR> <BR>
+									<b><u>(  ________________________  )</u></b><BR>
+
+								</div>
+								<div class="kanan" style="font-size:14px;line-height:20px;text-align: center;">
+
+									Bandung, <?php echo $model->tanggal_buat;?>
+									<BR>
+										Dikeluarkan Oleh : <BR>
+										a.n. Kepala Dinas Kependudukan dan Pencatatan Sipil <BR>
+										Kepala Desa BOJONGKUNCI <BR>
+										<BR> <BR> <BR> <BR> <BR> 
+											<b><u>(  ________________________  )</u></b><BR>
+
+										</div>
+									</div>
+								</center>
+
+								<div class="kotak" style="font-size:14px;line-height:20px;text-align: center;margin-top:15px">
+									<BR> <BR> <BR> <BR> 
+										Mengetahui, <BR>
+										Camat PAMEUNGPEUK
+										<BR> <BR> <BR> <BR>
+											<b><u>(  ________________________  )</u></b><BR>
+
+
+
+										</div>
+									</center>
 
 
 

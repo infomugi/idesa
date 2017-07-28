@@ -35,7 +35,6 @@ class DesaController extends Controller
 			array('allow',
 				'actions'=>array('data'),
 				'users'=>array('@'),
-				'expression'=>'Yii::app()->user->getLevel()==2',
 				),			
 			array('deny',
 				'users'=>array('*'),

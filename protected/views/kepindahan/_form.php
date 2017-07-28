@@ -11,6 +11,14 @@
 		<?php $form=$this->beginWidget('CActiveForm', array(
 			'id'=>'kepindahan-form',
 			'enableAjaxValidation'=>false,
+			'enableClientValidation' => true,
+			'clientOptions' => array(
+				'validateOnSubmit' => true,
+				),
+			'errorMessageCssClass' => 'label label-success',
+			'htmlOptions' => array('class' => 'form-horizontal', 'role' => 'form'),
+			'enableAjaxValidation'=>false,
+			'htmlOptions'=>array('enctype'=>'multipart/form-data'), 
 			)); ?>
 
 			<?php echo $form->errorSummary($model, null, null, array('class' => 'alert alert-warning')); ?>

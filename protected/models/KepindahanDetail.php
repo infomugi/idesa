@@ -33,6 +33,7 @@ class KepindahanDetail extends CActiveRecord
 			array('kepindahan_id, sdrt_id', 'numerical', 'integerOnly'=>true),
 			array('nik', 'length', 'max'=>32),
 			array('nama_lengkap', 'length', 'max'=>50),
+			array('nik', 'unique'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id_kepindahan_detail, kepindahan_id, nik, nama_lengkap, masa_berlaku_ktp, sdrt_id', 'safe', 'on'=>'search'),

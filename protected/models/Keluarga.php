@@ -49,6 +49,7 @@ class Keluarga extends CActiveRecord
 			array('no_kk', 'length', 'max'=>20),
 			array('catatan', 'length', 'max'=>200),
 			array('tglupdate, tglsensus, waktuupdate', 'safe'),
+			array('no_kk', 'unique'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('kd_umpi, tglupdate, nomorformulir, kd_desa, alamat, rt, rw, telponrumah, tks, no_kk, kd_surveyor, tglsensus, catatan, waktuupdate, kd_operator, ip_client', 'safe', 'on'=>'search'),

@@ -11,6 +11,14 @@
 		<?php $form=$this->beginWidget('CActiveForm', array(
 			'id'=>'kepindahan-detail-form',
 			'enableAjaxValidation'=>false,
+			'enableClientValidation' => true,
+			'clientOptions' => array(
+				'validateOnSubmit' => true,
+				),
+			'errorMessageCssClass' => 'label label-success',
+			'htmlOptions' => array('class' => 'form-horizontal', 'role' => 'form'),
+			'enableAjaxValidation'=>false,
+			'htmlOptions'=>array('enctype'=>'multipart/form-data'), 
 			)); ?>
 
 			<?php echo $form->errorSummary($model, null, null, array('class' => 'alert alert-warning')); ?>
@@ -25,7 +33,7 @@
 
 				<div class="col-sm-8">
 					<?php echo $form->error($model,'nik'); ?>
-					<?php echo $form->textField($model,'nik',array('class'=>'form-control')); ?>
+					<?php echo $form->textField($model,'nik',array('class'=>'form-control','placeholder'=>'NIK')); ?>
 				</div>
 
 			</div>  
@@ -39,7 +47,7 @@
 
 				<div class="col-sm-8">
 					<?php echo $form->error($model,'nama_lengkap'); ?>
-					<?php echo $form->textField($model,'nama_lengkap',array('class'=>'form-control')); ?>
+					<?php echo $form->textField($model,'nama_lengkap',array('class'=>'form-control','placeholder'=>'Nama Lengkap')); ?>
 				</div>
 
 			</div>  
@@ -52,6 +60,7 @@
 				</div>   
 
 				<div class="col-sm-8">
+					<div class="alert alert-info">Kosongkan Form Berikut, Apabila KTP Berlaku Seumur Hidup</div>
 					<?php echo $form->error($model,'masa_berlaku_ktp'); ?>
 					<?php
 					$this->widget('zii.widgets.jui.CJuiDatePicker', array(
@@ -63,6 +72,7 @@
 						'value'=>Yii::app()->dateFormatter->format("dd-MM-yyyy",strtotime($model->masa_berlaku_ktp)),
 						'htmlOptions'=>array(
 							'class'=>'form-control',
+							'placeholder'=>'Masa Berlaku KTP',
 							'tabindex'=>2
 							),
 						'options'=>array(
