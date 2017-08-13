@@ -180,7 +180,8 @@
 
 						<div class="col-sm-8">
 							<?php echo $form->error($model,'umur_ayah'); ?>
-							<?php echo $form->textField($model,'umur_ayah',array('class'=>'form-control','placeholder'=>'Umur Ayah')); ?>
+							<?php $this->widget('CMaskedTextField',array('model'=>$model,'attribute'=>'umur_ayah','mask'=>'99','htmlOptions'=>array('class'=>'form-control')));
+							?>
 						</div>
 
 					</div>  
@@ -260,7 +261,8 @@
 
 								<div class="col-sm-8">
 									<?php echo $form->error($model,'umur_ibu'); ?>
-									<?php echo $form->textField($model,'umur_ibu',array('class'=>'form-control','placeholder'=>'Umur Ibu')); ?>
+									<?php $this->widget('CMaskedTextField',array('model'=>$model,'attribute'=>'umur_ibu','mask'=>'99','htmlOptions'=>array('class'=>'form-control')));
+									?>
 								</div>
 
 							</div>  
