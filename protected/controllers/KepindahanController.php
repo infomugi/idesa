@@ -33,7 +33,7 @@ class KepindahanController extends Controller
 				'expression'=>'Yii::app()->user->getLevel()==1',
 				),
 			array('allow',
-				'actions'=>array('view','kelola','daftar','view','desa','daftarverifikasi','terima','tolak','print','report'),
+				'actions'=>array('view','kelola','daftar','view','desa','daftarverifikasi','terima','tolak','tambah','loadKecamatan','loadIdKota','loadKota','loadIdProvinsi','loadProvinsi','print','kabkota','kecamatan','loaddesa','report'),
 				'users'=>array('@'),
 				'expression'=>'Yii::app()->user->getLevel()==2',
 				),	
