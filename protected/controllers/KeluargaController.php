@@ -34,7 +34,7 @@ class KeluargaController extends Controller
 				),
 
 			array('allow',
-				'actions'=>array('view','kelola','daftar','tambah','daftarverifikasi','terima','tolak','report'),
+				'actions'=>array('view','kelola','daftar','daftarverifikasi','terima','tolak','report'),
 				'users'=>array('@'),
 				'expression'=>'Yii::app()->user->getLevel()==2',
 				),
