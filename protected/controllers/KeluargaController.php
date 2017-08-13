@@ -40,10 +40,16 @@ class KeluargaController extends Controller
 				),
 
 			array('allow',
+				'actions'=>array('view','kelola','daftar','view','print','daftarverifikasi','report'),
+				'users'=>array('@'),
+				'expression'=>'Yii::app()->user->getLevel()==3',
+				),	
+
+			array('allow',
 				'actions'=>array('tambah','update','view','delete','kelola','daftar','view','print','daftarverifikasi','terima','tolak','report'),
 				'users'=>array('@'),
-				'expression'=>'Yii::app()->user->getLevel()==3 || Yii::app()->user->getLevel()==4',
-				),			
+				'expression'=>'Yii::app()->user->getLevel()==4',
+				),							
 
 			array('deny',
 				'users'=>array('*'),

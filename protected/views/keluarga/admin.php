@@ -40,11 +40,11 @@ $this->pageTitle='Kelola Keluarga';
 						'tglupdate',
 						'no_kk',
 						'nama',
+						'alamat',
 						// 'kd_umpi',
 						// 'nomorformulir',
 						// array('name'=>'kd_desa','value'=>'$data->Desa->nama'),
 						// array('name'=>'kd_desa','value'=>'Keluarga::model()->kecamatan($data->Desa->kd_kecamatan)'),
-						'alamat',
 
 						array(
 							'header'=>'Action',
