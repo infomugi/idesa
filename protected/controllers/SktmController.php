@@ -33,7 +33,7 @@ class SktmController extends Controller
 				'expression'=>'Yii::app()->user->getLevel()==1',
 				),
 			array('allow',
-				'actions'=>array('view','kelola','daftar','view','daftarverifikasi','terima','tolak','print','report'),
+				'actions'=>array('view','kelola','daftar','view','daftarverifikasi','terima','tolak','tambah','report'),
 				'users'=>array('@'),
 				'expression'=>'Yii::app()->user->getLevel()==2',
 				),		
