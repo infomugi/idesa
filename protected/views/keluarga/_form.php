@@ -155,7 +155,7 @@
 
 							<div class="col-md-8">
 								<?php echo $form->error($model,'telponrumah'); ?>
-								<?php echo $form->textField($model,'telponrumah',array('class'=>'form-control','placeholder'=>'Telpon Rumah')); ?>
+								<?php echo $form->textField($model,'telponrumah',array('class'=>'form-control','placeholder'=>'Telpon Rumah'),array('onkeydown'=>'onlyNumber(event)')); ?>
 							</div>
 						</div>
 
@@ -201,13 +201,13 @@
 
 											'options'=>array(
 												'dateFormat' => 'd-mm-yy',
-												'showAnim'=>'slideDown',//'drop','fold','slideDown','fadeIn','blind','bounce','clip','drop'
-												'showButtonPanel'=>true,
-												'changeMonth'=>true,
-												'yearRange'=>'1980:1999',
-												'changeYear'=>true,
-												'defaultDate'=>'+1w',
-												),),					
+								'showAnim'=>'slideDown',//'drop','fold','slideDown','fadeIn','blind','bounce','clip','drop'
+								'showButtonPanel'=>true,
+								'changeMonth'=>true,
+								'yearRange'=>'1980:1999',
+								'changeYear'=>true,
+								'defaultDate'=>'+1w',
+								),),					
 
 										'jeniskelamin'=>array(
 											'type'=>'dropdownlist',

@@ -36,7 +36,8 @@
 
 				<div class="col-md-8">
 					<?php echo $form->error($model,'no_kk'); ?>
-					<?php echo $form->textField($model,'no_kk',array('class'=>'form-control','placeholder'=>'Nomor Kartu Keluarga')); ?>
+					<?php $this->widget('CMaskedTextField',array('model'=>$model,'attribute'=>'no_kk','mask'=>'999999-999999-9999','htmlOptions'=>array('class'=>'form-control')));
+					?>
 				</div>
 			</div>
 
@@ -139,11 +140,13 @@
 							<div class="col-md-8">
 								<div class="col-md-6 no-padding">
 									<?php echo $form->error($model,'rt'); ?>
-									<?php echo $form->textField($model,'rt',array('class'=>'form-control','placeholder'=>'RT')); ?>
+									<?php $this->widget('CMaskedTextField',array('model'=>$model,'attribute'=>'rt','mask'=>'99','htmlOptions'=>array('class'=>'form-control')));
+									?>
 								</div> 
 								<div class="col-md-6 no-padding"> 
 									<?php echo $form->error($model,'rw'); ?>
-									<?php echo $form->textField($model,'rw',array('class'=>'form-control','placeholder'=>'RW')); ?>
+									<?php $this->widget('CMaskedTextField',array('model'=>$model,'attribute'=>'rw','mask'=>'99','htmlOptions'=>array('class'=>'form-control')));
+									?>
 								</div>
 							</div>
 						</div>
@@ -155,7 +158,8 @@
 
 							<div class="col-md-8">
 								<?php echo $form->error($model,'telponrumah'); ?>
-								<?php echo $form->textField($model,'telponrumah',array('class'=>'form-control','placeholder'=>'Telpon Rumah')); ?>
+								<?php $this->widget('CMaskedTextField',array('model'=>$model,'attribute'=>'telponrumah','mask'=>'999999999999','htmlOptions'=>array('class'=>'form-control')));
+								?>
 							</div>
 						</div>
 
