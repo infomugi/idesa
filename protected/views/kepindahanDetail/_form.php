@@ -33,7 +33,8 @@
 
 				<div class="col-sm-8">
 					<?php echo $form->error($model,'nik'); ?>
-					<?php echo $form->textField($model,'nik',array('class'=>'form-control','placeholder'=>'NIK')); ?>
+					<?php $this->widget('CMaskedTextField',array('model'=>$model,'attribute'=>'nik','mask'=>'99-99-999999-99-9999','htmlOptions'=>array('class'=>'form-control')));
+					?>
 				</div>
 
 			</div>  

@@ -32,7 +32,8 @@
 
 				<div class="col-sm-8">
 					<?php echo $form->error($model,'no_kk'); ?>
-					<?php echo $form->textField($model,'no_kk',array('class'=>'form-control')); ?>
+					<?php $this->widget('CMaskedTextField',array('model'=>$model,'attribute'=>'no_kk','mask'=>'999999-999999-9999','htmlOptions'=>array('class'=>'form-control')));
+					?>
 				</div>
 
 			</div>  
@@ -74,7 +75,8 @@
 
 				<div class="col-sm-8">
 					<?php echo $form->error($model,'kode_pos'); ?>
-					<?php echo $form->textField($model,'kode_pos',array('class'=>'form-control')); ?>
+					<?php $this->widget('CMaskedTextField',array('model'=>$model,'attribute'=>'kode_pos','mask'=>'99999','htmlOptions'=>array('class'=>'form-control')));
+					?>
 				</div>
 
 			</div>  
