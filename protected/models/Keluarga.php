@@ -41,7 +41,7 @@ class Keluarga extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('kd_desa, nama, alamat, rt, rw, no_kk, waktuupdate, kd_operator, ip_client', 'required'),
-			array('kd_desa, rt, rw, tks, kd_surveyor, kd_operator, status', 'numerical', 'integerOnly'=>true),
+			array('kd_desa, rt, rw, tks, kd_surveyor, kd_operator, status, telpongenggam, telponrumah', 'numerical', 'integerOnly'=>true),
 			array('nomorformulir', 'length', 'max'=>10),
 			array('nama, alamat, ip_client', 'length', 'max'=>100),
 			array('telponrumah', 'length', 'max'=>15),

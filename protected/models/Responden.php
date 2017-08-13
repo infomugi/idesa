@@ -68,7 +68,7 @@ class Responden extends CActiveRecord
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('kd_responden, kd_umpi, sdrt, nomor, nama, kd_tempatlahir, tempatlahir, tgllahir, tg, bl, th, jeniskelamin, kd_statusnikah, kd_pendidikan, kd_jurusanpendidikan, kd_agama, kd_pekerjaan, kd_bidangusaha, bidangusaha, nomorkartukuning, nik, telpongenggam, email, ipk, tb, bb, waktuupdate, kd_operator, migrasi, waktumigrasi', 'safe', 'on'=>'search'),
-		);
+			);
 	}
 
 	/**
@@ -85,7 +85,7 @@ class Responden extends CActiveRecord
 			'Statusnikah'=>array(self::BELONGS_TO,'Statusnikah','kd_statusnikah'),
 			'Pendidikan'=>array(self::BELONGS_TO,'Pendidikan','kd_pendidikan'),
 			'Pekerjaan'=>array(self::BELONGS_TO,'Pekerjaan','kd_pekerjaan'),
-		);
+			);
 	}
 
 	/**
@@ -96,7 +96,7 @@ class Responden extends CActiveRecord
 		return array(
 			'kd_responden' => 'Kode Responden',
 			'kd_umpi' => 'Kode Umpi',
-			'sdrt' => 'SDRT',
+			'sdrt' => 'SHDK',
 			'nomor' => 'Nomor',
 			'nama' => 'Nama',
 			'kd_tempatlahir' => 'Kode Tempat Lahir',
@@ -124,7 +124,7 @@ class Responden extends CActiveRecord
 			'kd_operator' => 'Kode Operator',
 			'migrasi' => 'Migrasi',
 			'waktumigrasi' => 'Waktu Migrasi',
-		);
+			);
 	}
 
 	/**
@@ -178,7 +178,7 @@ class Responden extends CActiveRecord
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
-		));
+			));
 	}
 
 	/**
