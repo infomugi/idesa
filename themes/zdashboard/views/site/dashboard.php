@@ -17,7 +17,7 @@ $this->pageTitle='Dashboard';
 			</ul>
 			<div class="tab-content" id="myTabContent">
 				<div class="tab-pane fade active in" role="tabpanel" id="home" aria-labelledby="home-tab">
-					<H3><i class="fa fa-file-text"></i> Verifikasi Surat Pindah <span class="label label-danger pull-right"><?php echo $dataKepindahan->getTotalItemCount(); ?></span></H3>
+					<H3><i class="fa fa-file-text"></i> Surat Pindah (Dalam Proses) <span class="label label-danger pull-right"><?php echo $dataKepindahan->getTotalItemCount(); ?></span></H3>
 
 					<?php $this->widget('zii.widgets.grid.CGridView', array(
 						'id'=>'kepindahan-grid',
@@ -48,7 +48,7 @@ $this->pageTitle='Dashboard';
 							)); ?>
 						</div>
 						<div class="tab-pane fade" role="tabpanel" id="profile" aria-labelledby="profile-tab">
-							<H3><i class="fa fa-file-text"></i> Verifikasi SKTM <span class="label label-success pull-right"><?php echo $dataSktm->getTotalItemCount(); ?></span></H3>
+							<H3><i class="fa fa-file-text"></i> SKTM (Dalam Proses) <span class="label label-success pull-right"><?php echo $dataSktm->getTotalItemCount(); ?></span></H3>
 
 							<?php $this->widget('zii.widgets.grid.CGridView', array(
 								'id'=>'kepindahan-grid',
@@ -81,7 +81,7 @@ $this->pageTitle='Dashboard';
 
 								</div>
 								<div class="tab-pane fade" role="tabpanel" id="dropdown1" aria-labelledby="dropdown1-tab">
-									<H3><i class="fa fa-file-text"></i> Verifikasi Pengantar KK <span class="label label-warning pull-right"><?php echo $dataKK->getTotalItemCount(); ?></span></H3>
+									<H3><i class="fa fa-file-text"></i> Pengantar KK (Dalam Proses) <span class="label label-warning pull-right"><?php echo $dataKK->getTotalItemCount(); ?></span></H3>
 
 									<?php $this->widget('zii.widgets.grid.CGridView', array(
 										'id'=>'kepindahan-grid',
