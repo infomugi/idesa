@@ -14,21 +14,21 @@ class UserIdentity extends CUserIdentity
 		$username = strtolower($this->username);
 		$user = User::model()->find('LOWER(username)=?', array($username));
 		if($user===null)
-		    $this->errorCode=self::ERROR_USERNAME_INVALID;
+			$this->errorCode=self::ERROR_USERNAME_INVALID;
 		else if($user->password!==md5($this->password))
-		    $this->errorCode = self::ERROR_PASSWORD_INVALID;
+			$this->errorCode = self::ERROR_PASSWORD_INVALID;
 		else
 		{
-		    $this->_id = $user->id_user;
-		    $this->setState('record', $user);
-		    $this->setState('profile', $user->level);
-		    $this->setState('profile', $user->bagian);
-		    $this->setState('profile', $user->id_user);
-		    $this->username = $user->username;
-		    $this->errorCode = self::ERROR_NONE;
-	  	}
+			$this->_id = $user->id_user;
+			$this->setState('record', $user);
+			$this->setState('profile', $user->level);
+			$this->setState('profile', $user->bagian);
+			$this->setState('profile', $user->id_user);
+			$this->username = $user->username;
+			$this->errorCode = self::ERROR_NONE;
+		}
 
-	   	return $this->errorCode == self::ERROR_NONE;
+		return $this->errorCode == self::ERROR_NONE;
 	}
 	
 	public function getId()

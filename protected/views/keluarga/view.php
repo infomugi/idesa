@@ -59,6 +59,15 @@ $dataProvider=new CActiveDataProvider('Responden',array('criteria'=>array('condi
 											</div>
 
 
+											<?php if($model->deskripsi!=""): ?>
+												Memo
+												<div class="alert <?php echo Kepindahan::model()->alert($model->status); ?>">
+													<?php echo $model->deskripsi; ?>
+												</div>
+											<?php endif; ?>
+
+
+
 											<?php $this->widget('zii.widgets.CDetailView', array(
 												'data'=>$model,
 												'htmlOptions'=>array("class"=>"table"),

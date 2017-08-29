@@ -49,6 +49,7 @@ class Sktm extends CActiveRecord
 			array('no_sktm, tempat_lahir, tingkat', 'length', 'max'=>25),
 			array('nama_anak, nama_ayah, nama_ibu', 'length', 'max'=>50),
 			array('instansi', 'length', 'max'=>100),
+			array('deskripsi', 'length', 'max'=>255),
 			array('no_sktm', 'unique'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.

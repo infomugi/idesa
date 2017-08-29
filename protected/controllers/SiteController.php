@@ -29,7 +29,9 @@ class SiteController extends Controller
 	{
 		if(YII::app()->user->isGuest){
 
-			$this->actionLogin();
+			$this->layout = "intro";
+			$this->render('intro');
+			
 		}else{
 			
 			$this->layout = "page";

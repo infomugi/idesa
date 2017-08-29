@@ -3,6 +3,7 @@
 /* @var $dataProvider CActiveDataProvider */
 $this->pageTitle='Dashboard';
 ?>
+
 <div class="row">
 	<div class="col-md-10 col-md-offset-1">
 		<div class="bs-example bs-example-tabs" data-example-id="togglable-tabs">
@@ -118,3 +119,8 @@ $this->pageTitle='Dashboard';
 
 							</div>
 						</div>
+
+
+
+
+						

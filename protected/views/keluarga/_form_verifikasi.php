@@ -33,38 +33,15 @@
 				
 			</div>  
 
-			
+
+
 			<div class="form-group">
-				
-				<div class="col-sm-4 control-label">
-					<?php echo $form->labelEx($model,'status'); ?>
-				</div>   
-
-				<div class="col-sm-8">
-					<?php echo $form->error($model,'status'); ?>
-					<?php
-					echo $form->radioButtonList($model,'status',
-						array('1'=>'Disetujui','2'=>'Ditolak'),
-						array(
-							'template'=>'{input}{label}',
-							'separator'=>'',
-							'labelOptions'=>array(
-								'class'=>'minimal', 'style'=>'padding-right:20px;margin-left:5px'),
-
-							)                              
-						);
-						?>
-					</div>
-					
-				</div>  
-
-				<div class="form-group">
-					<div class="col-md-12">  
-					</br></br>
-					<?php echo CHtml::submitButton($model->isNewRecord ? 'Simpan' : 'Edit', array('class' => 'btn btn-info btn-flat pull-right')); ?>
-				</div>
+				<div class="col-md-12">  
+				</br></br>
+				<?php echo CHtml::submitButton($model->isNewRecord ? 'Simpan' : 'Verifikasi', array('class' => 'btn btn-info btn-flat pull-right')); ?>
 			</div>
+		</div>
 
-			<?php $this->endWidget(); ?>
+		<?php $this->endWidget(); ?>
 
 </div></div><!-- form -->

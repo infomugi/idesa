@@ -328,23 +328,39 @@ class KeluargaController extends Controller
 			));
 	}	
 
+
 	public function actionTerima($id)
 	{
 		$model=$this->loadModel($id);
-		$model->status=1;
-		if($model->save()){
-			$this->redirect(array('view','id'=>$model->kd_umpi));
+
+		if(isset($_POST['Keluarga']))
+		{
+			$model->attributes=$_POST['Keluarga'];
+			$model->status=1;
+			if($model->save())
+				$this->redirect(array('view','id'=>$model->kd_umpi));
 		}
+
+		$this->render('verifikasi',array(
+			'model'=>$model,
+			));
 	}
 
 	public function actionTolak($id)
 	{
 		$model=$this->loadModel($id);
-		$model->status=2;
-		if($model->save()){
-			$this->redirect(array('view','id'=>$model->kd_umpi));
+		if(isset($_POST['Keluarga']))
+		{
+			$model->attributes=$_POST['Keluarga'];
+			$model->status=2;
+			if($model->save())
+				$this->redirect(array('view','id'=>$model->kd_umpi));
 		}
-	}		
+
+		$this->render('verifikasi',array(
+			'model'=>$model,
+			));
+	}			
 
 	public function actionPrint($id)
 	{
