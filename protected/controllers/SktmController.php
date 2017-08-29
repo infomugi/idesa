@@ -201,19 +201,34 @@ class SktmController extends Controller
 	public function actionTerima($id)
 	{
 		$model=$this->loadModel($id);
-		$model->status=1;
-		if($model->save()){
-			$this->redirect(array('view','id'=>$model->id_sktm));
+
+		if(isset($_POST['Sktm']))
+		{
+			$model->attributes=$_POST['Sktm'];
+			$model->status=1;
+			if($model->save())
+				$this->redirect(array('view','id'=>$model->id_sktm));
 		}
+
+		$this->render('verifikasi',array(
+			'model'=>$model,
+			));
 	}
 
 	public function actionTolak($id)
 	{
 		$model=$this->loadModel($id);
-		$model->status=2;
-		if($model->save()){
-			$this->redirect(array('view','id'=>$model->id_sktm));
+		if(isset($_POST['Sktm']))
+		{
+			$model->attributes=$_POST['Sktm'];
+			$model->status=2;
+			if($model->save())
+				$this->redirect(array('view','id'=>$model->id_sktm));
 		}
+
+		$this->render('verifikasi',array(
+			'model'=>$model,
+			));
 	}		
 
 	public function actionPrint($id)

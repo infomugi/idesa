@@ -42,6 +42,7 @@ class Kepindahan extends CActiveRecord
 		return array(
 			array('tanggal_buat, petugas_id, no_kk, nama_kk, alamat, kode_pos, alasan_pindah, alamat_tujuan, provinsi_id, kabkota_id, kecamatan_id, desa_id, jenis_kepindahan, status_kk_yang_tidak_pindah, status_kk_pindah, status', 'required'),
 			array('petugas_id, provinsi_id, kabkota_id, kecamatan_id, jenis_kepindahan, status_kk_yang_tidak_pindah, status_kk_pindah, status', 'numerical', 'integerOnly'=>true),
+			array('deskripsi', 'length', 'max'=>255),
 			array('desa_id', 'length', 'max'=>10),
 			array('no_kk', 'length', 'max'=>25),
 			array('nama_kk', 'length', 'max'=>50),
@@ -92,6 +93,7 @@ class Kepindahan extends CActiveRecord
 			'status_kk_yang_tidak_pindah' => 'Status KK Yang Tidak Pindah',
 			'status_kk_pindah' => 'Status KK Pindah',
 			'status' => 'Status',
+			'deskripsi' => 'Keterangan Verifikasi',
 			);
 	}
 

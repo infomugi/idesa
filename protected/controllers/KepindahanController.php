@@ -291,19 +291,34 @@ class KepindahanController extends Controller
 	public function actionTerima($id)
 	{
 		$model=$this->loadModel($id);
-		$model->status=1;
-		if($model->save()){
-			$this->redirect(array('view','id'=>$model->id_kepindahan));
+
+		if(isset($_POST['Kepindahan']))
+		{
+			$model->attributes=$_POST['Kepindahan'];
+			$model->status=1;
+			if($model->save())
+				$this->redirect(array('view','id'=>$model->id_kepindahan));
 		}
+
+		$this->render('verifikasi',array(
+			'model'=>$model,
+			));
 	}
 
 	public function actionTolak($id)
 	{
 		$model=$this->loadModel($id);
-		$model->status=2;
-		if($model->save()){
-			$this->redirect(array('view','id'=>$model->id_kepindahan));
+		if(isset($_POST['Kepindahan']))
+		{
+			$model->attributes=$_POST['Kepindahan'];
+			$model->status=2;
+			if($model->save())
+				$this->redirect(array('view','id'=>$model->id_kepindahan));
 		}
+
+		$this->render('verifikasi',array(
+			'model'=>$model,
+			));
 	}		
 
 	public function actionPrint($id)
