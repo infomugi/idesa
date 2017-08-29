@@ -28,7 +28,8 @@ $this->pageTitle='Detail Pengantar Surat Pindah';
 	<div class="line2"></div>
 	<BR> <BR>
 		<div class="judul"><U>SURAT KETERANGAN PINDAH WNI</U></div>
-		<div class="info">Antar Kecamatan Dalam Satu Kabupaten / Kota</div>
+		<!-- <div class="info">Antar Kecamatan Dalam Satu Kabupaten / Kota</div> -->
+		<div class="info">Antar Kabupaten / Kota</div>
 		<div class="info">NOMOR : 475/&ensp; &ensp; &ensp;/DS/<?php echo date('m')."/".date('Y'); ?></div>
 
 	</div>
@@ -187,7 +188,7 @@ $this->pageTitle='Detail Pengantar Surat Pindah';
 
 				array('header'=>'NIK','value'=>'$data->nik'),
 				array('header'=>'Nama Lengkap','value'=>'$data->nama_lengkap'),
-				array('header'=>'NIK','value'=>'$data->masa_berlaku_ktp'),
+				array('header'=>'Tanggal Lahir','value'=>'$data->masa_berlaku_ktp'),
 				array('header'=>'SHDK','value'=>'$data->Sdrt->nama'),
 
 

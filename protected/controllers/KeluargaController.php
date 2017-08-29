@@ -278,27 +278,12 @@ class KeluargaController extends Controller
 	public function loadModel($id)
 	{
 		$model=Keluarga::model()->findByPk($id);
-		if(Yii::app()->user->getLevel()==1){
 
-			if($model===null)
-				throw new CHttpException(404,'Data yang anda cari kemungkinan telah dihapus.');
-			return $model;
 
-		}else{
+		if($model===null)
+			throw new CHttpException(404,'Data yang anda cari kemungkinan telah dihapus.');
+		return $model;
 
-			if($model->kd_operator==YII::app()->user->id || Yii::app()->user->getLevel()==2){
-
-				if($model===null)
-					throw new CHttpException(404,'Data yang anda cari kemungkinan telah dihapus.');
-				return $model;
-
-			}else{
-				//$userid,$description,$activityid,$type,$point,$status
-				Activities::model()->my(YII::app()->user->id,"403 - Tidak Diijinkan Melihat Data Keluarga tidak Bekerja, No KK : ".$model->no_kk,21,10,0,0);
-				throw new CHttpException(403,'Anda tidak diijikan untuk melakukan aksi ini.');
-			}
-
-		}
 
 
 	}

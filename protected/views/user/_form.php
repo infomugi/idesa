@@ -170,7 +170,7 @@
 							<?php echo $form->error($model,'level'); ?>
 							<?php
 							echo $form->radioButtonList($model,'level',
-								array('1'=>'Administrator','2'=>'Kepala Desa','3'=>'Bagian Pengelolaan','4'=>'Bagian Pelayanan'),
+								array('1'=>'Administrator','2'=>'Kepala Desa','3'=>'Bagian Pemerintahan','4'=>'Bagian Pelayanan'),
 								array(
 									'template'=>'{input}{label}',
 									'separator'=>'',
