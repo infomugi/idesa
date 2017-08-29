@@ -50,9 +50,9 @@ Yii::app()->clientScript->registerCoreScript('jquery');
                         <div class="main-menu">
                             <nav>
                                 <ul>
-                                    <li><a href="#home">SKTM</a></li>
-                                    <li><a href="#about">Surat Pindah</a></li>
-                                    <li><a href="#service">Surat Pengantar KK</a></li>
+                                    <li><a href="#" data-toggle="collapse" data-target="#sktm">SKTM</a></li>
+                                    <li><a href="#" data-toggle="collapse" data-target="#pindah">Surat Pindah</a></li>
+                                    <li><a href="#" data-toggle="collapse" data-target="#kk">Surat Pengantar KK</a></li>
                                     <li><a href="<?php echo $url; ?>site/login">Login</a></li>
                                 </ul>
                             </nav>

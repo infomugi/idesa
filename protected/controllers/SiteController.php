@@ -64,10 +64,42 @@ class SiteController extends Controller
 					'pageSize'=>'12',
 					)));
 
+			$dataKepindahan1=new CActiveDataProvider('Kepindahan',array(
+				'criteria'=>array(
+					'condition'=>'status=1',
+					'order'=>'id_kepindahan DESC'
+					),
+				'pagination'=>array(
+					'pageSize'=>'12',
+					)));
+
+			$dataSktm1=new CActiveDataProvider('Sktm',array(
+				'criteria'=>array(
+					'condition'=>'status=1',
+					'order'=>'id_sktm DESC'
+					),
+				'pagination'=>array(
+					'pageSize'=>'12',
+					)));
+
+
+			$dataKK1=new CActiveDataProvider('Keluarga',array(
+				'criteria'=>array(
+					'condition'=>'status=1',
+					'order'=>'kd_umpi DESC'
+					),
+				'pagination'=>array(
+					'pageSize'=>'12',
+					)));			
+
 			$this->render('dashboard',array(
 				'dataKepindahan'=>$dataKepindahan,
 				'dataSktm'=>$dataSktm,
 				'dataKK'=>$dataKK,
+
+				'dataKepindahan1'=>$dataKepindahan1,
+				'dataSktm1'=>$dataSktm1,
+				'dataKK1'=>$dataKK1,
 				));
 		}
 	}

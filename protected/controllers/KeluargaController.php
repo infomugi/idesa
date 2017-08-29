@@ -28,6 +28,10 @@ class KeluargaController extends Controller
 	{
 		return array(
 			array('allow',
+				'actions'=>array('search'),
+				'users'=>array('*'),
+				),			
+			array('allow',
 				'actions'=>array('tambah','update','view','delete','kelola','daftar','view','print','daftarverifikasi','terima','tolak','report'),
 				'users'=>array('@'),
 				'expression'=>'Yii::app()->user->getLevel()==1',
@@ -376,5 +380,14 @@ class KeluargaController extends Controller
 		$this->render('report',array(
 			'dataProvider'=>$dataProvider,
 			));
+	}	
+
+	public function actionSearch($string=''){
+		$this->layout = "signin";
+		$criteria = new CDbCriteria();
+		if(strlen($string)>0)
+			$criteria->addSearchCondition('kd_umpi', $string, true, 'OR');
+		$dataProvider = new CActiveDataProvider('Keluarga', array('criteria'=>$criteria));
+		$this->render('search', array('dataProvider'=>$dataProvider));		
 	}	
 }

@@ -28,6 +28,10 @@ class SktmController extends Controller
 	{
 		return array(
 			array('allow',
+				'actions'=>array('search'),
+				'users'=>array('*'),
+				),			
+			array('allow',
 				'actions'=>array('tambah','update','view','delete','kelola','daftar','view','daftarverifikasi','terima','tolak','print','report'),
 				'users'=>array('@'),
 				'expression'=>'Yii::app()->user->getLevel()==1',
@@ -246,5 +250,14 @@ class SktmController extends Controller
 			'dataProvider'=>$dataProvider,
 			));
 	}		
+
+	public function actionSearch($string=''){
+		$this->layout = "signin";
+		$criteria = new CDbCriteria();
+		if(strlen($string)>0)
+			$criteria->addSearchCondition('id_sktm', $string, true, 'OR');
+		$dataProvider = new CActiveDataProvider('Sktm', array('criteria'=>$criteria));
+		$this->render('search', array('dataProvider'=>$dataProvider));		
+	}	
 
 }

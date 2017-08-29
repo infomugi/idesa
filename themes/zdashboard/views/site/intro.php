@@ -5,21 +5,52 @@
                 <div class="row">
                     <div class="col-md-12 text-center">
                         <div class="slider-content">
-                            <h2>Tracking Dokumen <span>Pelayanan Pembuatan Surat Kepindahan</span></h2>
-                            <form id="mc-form" class="subscrie-form">
-                                <label class="mt10" for="mc-email"></label>
-                                <div class="input-group">
-                                    <input type="email" class="form-control" id="mc-email" placeholder="Cari Berdasarkan Nomor Surat">
-                                    <div class="input-group-btn">
-                                        <button type="submit" class="btn btn-info">Cari</button>
-                                    </div>
-                                </div>
-                            </form>
+                            <h2>Tracking Dokumen <span>Cek Pelayanan Pembuatan SKTM, Pengantar KK, Surat Pindah</span></h2>
+
+                            <div class="row">
+                                <div class="col-md-6 col-md-offset-3">
+
+
+                                 <div id="sktm" class="collapse">
+
+                                    <?php 
+                                    echo CHtml::beginForm(CHtml::normalizeUrl(array('sktm/search')), 'get')
+                                    . CHtml::textField('string', (isset($_GET['string'])) ? $_GET['string'] : '', array('id'=>'string','class'=>'form-control input-lg','placeholder'=>'Cari Berdasarkan No. SKTM'))
+                                    . CHtml::endForm();
+                                    ?>
+
+                                </div> 
+                                
+
+
+                                <div id="pindah" class="collapse">
+
+                                    <?php 
+                                    echo CHtml::beginForm(CHtml::normalizeUrl(array('kepindahan/search')), 'get')
+                                    . CHtml::textField('string', (isset($_GET['string'])) ? $_GET['string'] : '', array('id'=>'string','class'=>'form-control input-lg','placeholder'=>'Cari Berdasarkan No. Surat Pindah'))
+                                    . CHtml::endForm();
+                                    ?>
+                                </div> 
+
+
+                                <div id="kk" class="collapse">
+                                    <?php 
+                                    echo CHtml::beginForm(CHtml::normalizeUrl(array('keluarga/search')), 'get')
+                                    . CHtml::textField('string', (isset($_GET['string'])) ? $_GET['string'] : '', array('id'=>'string','class'=>'form-control input-lg','placeholder'=>'Cari Berdasarkan No. Pengantar KK'))
+                                    . CHtml::endForm();
+                                    ?>
+                                </div> 
+
+
+
+                            </div>
                         </div>
 
                     </div>
+
                 </div>
             </div>
         </div>
     </div>
+</div>
     <!--Slider area End -->
