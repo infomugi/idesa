@@ -191,11 +191,11 @@ class SktmController extends Controller
 		$dataProvider=new CActiveDataProvider('Sktm',array(
 			'criteria'=>array(
 				'condition'=>'status=0',
-				'order'=>'id_sktm DESC'
+				'order'=>'id_sktm DESC',
+				'offset'=>0,
+				'limit' => 1,
 				),
-			'pagination'=>array(
-				'pageSize'=>'12',
-				)));
+			'pagination'=>false));
 
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,

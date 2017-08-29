@@ -280,11 +280,11 @@ class KepindahanController extends Controller
 		$dataProvider=new CActiveDataProvider('Kepindahan',array(
 			'criteria'=>array(
 				'condition'=>'status=0',
-				'order'=>'id_kepindahan DESC'
+				'order'=>'id_kepindahan DESC',
+				'offset'=>0,
+				'limit' => 1,
 				),
-			'pagination'=>array(
-				'pageSize'=>'12',
-				)));
+			'pagination'=>false));
 
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,

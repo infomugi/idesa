@@ -321,11 +321,11 @@ class KeluargaController extends Controller
 		$dataProvider=new CActiveDataProvider('Keluarga',array(
 			'criteria'=>array(
 				'condition'=>'status=0',
-				'order'=>'kd_umpi DESC'
+				'order'=>'kd_umpi DESC',
+				'offset'=>0,
+				'limit' => 1,
 				),
-			'pagination'=>array(
-				'pageSize'=>'12',
-				)));
+			'pagination'=>false));
 
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
