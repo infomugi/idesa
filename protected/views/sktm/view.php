@@ -17,34 +17,43 @@ $this->pageTitle='Detail SKTM';
 		array('tambah'),
 		array('class' => 'btn btn-info btn-flat','title'=>'Tambah SKTM'));
 		?>
-		<?php echo CHtml::link('List',
-			array('daftar'),
-			array('class' => 'btn btn-info btn-flat', 'title'=>'Daftar SKTM'));
+		<?php echo CHtml::link('Kelola',
+			array('kelola'),
+			array('class' => 'btn btn-info btn-flat','title'=>'Kelola SKTM'));
 			?>
-			<?php echo CHtml::link('Kelola',
-				array('kelola'),
-				array('class' => 'btn btn-info btn-flat','title'=>'Kelola SKTM'));
-				?>
-				<?php echo CHtml::link('Edit', 
-					array('update', 'id'=>$model->id_sktm,
-						), array('class' => 'btn btn-info btn-flat', 'title'=>'Edit SKTM'));
-						?>
-						<?php echo CHtml::link('Hapus', 
-							array('delete', 'id'=>$model->id_sktm,
-								),  array('class' => 'btn btn-warning btn-flat', 'title'=>'Hapus SKTM'));
-								?>
+			<?php echo CHtml::link('Edit', 
+				array('update', 'id'=>$model->id_sktm,
+					), array('class' => 'btn btn-info btn-flat', 'title'=>'Edit SKTM'));
+					?>
+					<?php echo CHtml::link('Hapus', 
+						array('delete', 'id'=>$model->id_sktm,
+							),  array('class' => 'btn btn-warning btn-flat', 'title'=>'Hapus SKTM'));
+							?>
 
-								<?php echo CHtml::link(CHtml::encode("Setujui SKTM"), array('terima', 'id'=>$model->id_sktm),array('class'=>'btn btn-success')); ?>
+							<?php if($model->status==1): ?>
+								<?php if($model->pengambilan_id==0){ ?>
+									<?php if(Yii::app()->user->getLevel()==3 || Yii::app()->user->getLevel()==4): ?>
+									<?php echo CHtml::link(CHtml::encode("Pengambilan SKTM"), array('pengambilan', 'id'=>$model->id_sktm),array('class'=>'btn btn-success')); ?>
+								<?php endif; ?>
 
-								<?php echo CHtml::link(CHtml::encode("Tolak SKTM"), array('tolak', 'id'=>$model->id_sktm),array('class'=>'btn btn-danger')); ?>
+								<?php }else{ ?>
+									<button class="btn btn-info disabled">Sudah di Ambil</button>
+									<?php } ?>
+								<?php endif; ?>
+								
+								<?php if(Yii::app()->user->getLevel()==1 || Yii::app()->user->getLevel()==2): ?>
+									<?php echo CHtml::link(CHtml::encode("Setujui SKTM"), array('terima', 'id'=>$model->id_sktm),array('class'=>'btn btn-success')); ?>
+
+									<?php echo CHtml::link(CHtml::encode("Tolak SKTM"), array('tolak', 'id'=>$model->id_sktm),array('class'=>'btn btn-danger')); ?>
+								<?php endif; ?>
 
 								<?php if($model->status==1): ?>
 
-									<?php echo CHtml::link('<i class="fa fa-print"></i> Cetak SKTM', 
+									<?php echo CHtml::link('<i class="fa fa-print"></i> Cetak', 
 										array('print', 'id'=>$model->id_sktm,
 											),  array('class' => 'btn btn-primary pull-right btn-flat', 'title'=>'Print SKTM'));
 											?>
-											
+
 										<?php endif; ?>
 
 										<HR>
@@ -60,7 +69,7 @@ $this->pageTitle='Detail SKTM';
 												</div>
 											<?php endif; ?>
 
-
+											<H3><i class="fa fa-qrcode"></i> No. Resi SKTM : <?php echo $model->no_resi; ?></H3>
 											<?php $this->widget('zii.widgets.CDetailView', array(
 												'data'=>$model,
 												'htmlOptions'=>array("class"=>"table"),
@@ -90,9 +99,70 @@ $this->pageTitle='Detail SKTM';
 													),
 													)); ?>
 
-												</div>
 
-												<STYLE>
-													th{width:150px;}
-												</STYLE>
+													<div class="col-md-6"> 
+														<H3>Riwayat Cetak Dokumen</H3>
+														<?php $this->widget('zii.widgets.CDetailView', array(
+															'data'=>$model,
+															'htmlOptions'=>array("class"=>"table"),
+															'attributes'=>array(
+																array('name'=>'print_by','value'=>$model->print_by==0 ? "-" : $model->PrintPetugas->namalengkap),
+
+																array(
+																	'name'=>'print_klik',
+																	'value'=>$model->print_klik,
+																	'visible'=>$model->print_by!=0,
+																	),
+
+																array(
+																	'name'=>'print_tanggal',
+																	'value'=>$model->print_tanggal,
+																	'visible'=>$model->print_by!=0,
+																	),
+
+																array(
+																	'name'=>'print_deskripsi',
+																	'value'=>$model->print_deskripsi,
+																	'visible'=>$model->print_by!=0,
+																	),
+
+
+																),
+																)); ?>
+															</div>
+
+
+															<div class="col-md-6"> 
+																<H3>Riwayat Pengambilan Dokumen</H3>
+																<?php $this->widget('zii.widgets.CDetailView', array(
+																	'data'=>$model,
+																	'htmlOptions'=>array("class"=>"table"),
+																	'attributes'=>array(
+																		array(
+																			'name'=>'pengambilan_id',
+																			'value'=>$model->pengambilan_id==0 ? "Belum di Ambil" : $model->PengambilanPetugas->namalengkap
+																			),
+
+																		array(
+																			'name'=>'pengambilan_tanggal',
+																			'value'=>$model->pengambilan_tanggal,
+																			'visible'=>$model->pengambilan_id!=0,
+																			),
+
+																		array(
+																			'name'=>'pengambilan_oleh',
+																			'value'=>$model->pengambilan_oleh,
+																			'visible'=>$model->pengambilan_id!=0,
+																			),
+
+
+																		),
+																		)); ?>
+																	</div>
+
+																</div>
+
+																<STYLE>
+																	th{width:150px;}
+																</STYLE>
 

@@ -37,7 +37,7 @@ $this->pageTitle='Kelola Sktm';
 								'style' => 'text-align: center;')),
 
 					// 'id_sktm',
-						'no_sktm',
+						'no_resi',
 		// 'tanggal_input',
 		// 'tanggal_buat',
 		// 'petugas_id',

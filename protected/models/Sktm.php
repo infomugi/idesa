@@ -44,9 +44,15 @@ class Sktm extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('no_sktm, tanggal_input, tanggal_buat, petugas_id, nama_anak, tempat_lahir, tanggal_lahir, tingkat, instansi, nama_ayah, umur_ayah, agama_ayah, pekerjaan_ayah, alamat_ayah, nama_ibu, umur_ibu, agama_ibu, pekerjaan_ibu, alamat_ibu, status', 'required'),
+			array('tanggal_input, tanggal_buat, petugas_id, nama_anak, tempat_lahir, tanggal_lahir, tingkat, instansi, nama_ayah, umur_ayah, agama_ayah, pekerjaan_ayah, alamat_ayah, nama_ibu, umur_ibu, agama_ibu, pekerjaan_ibu, alamat_ibu, status', 'required'),
 			array('petugas_id, umur_ayah, agama_ayah, pekerjaan_ayah, umur_ibu, agama_ibu, pekerjaan_ibu, status', 'numerical', 'integerOnly'=>true),
-			array('no_sktm, tempat_lahir, tingkat', 'length', 'max'=>25),
+
+
+			array('print_by, print_klik, pengambilan_id', 'numerical', 'integerOnly'=>true),
+			array('print_deskripsi', 'length', 'max'=>255),
+			array('pengambilan_tanggal, print_tanggal, pengambilan_oleh', 'length', 'max'=>25),	
+
+			array('no_sktm, tempat_lahir, tingkat, no_resi', 'length', 'max'=>25),
 			array('nama_anak, nama_ayah, nama_ibu', 'length', 'max'=>50),
 			array('instansi', 'length', 'max'=>100),
 			array('deskripsi', 'length', 'max'=>255),
@@ -65,6 +71,8 @@ class Sktm extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'PengambilanPetugas'=>array(self::BELONGS_TO,'User','pengambilan_id'),
+			'PrintPetugas'=>array(self::BELONGS_TO,'User','print_by'),
 			'Petugas'=>array(self::BELONGS_TO,'User','petugas_id'),
 			'AgamaAyah'=>array(self::BELONGS_TO,'Agama','agama_ayah'),
 			'AgamaIbu'=>array(self::BELONGS_TO,'Agama','agama_ibu'),
@@ -100,6 +108,14 @@ class Sktm extends CActiveRecord
 			'pekerjaan_ibu' => 'Pekerjaan Ibu',
 			'alamat_ibu' => 'Alamat Ibu',
 			'status' => 'Status',
+
+			'print_by' => 'Terakhir Dicetak Oleh',
+			'print_klik' => 'Total Tombol Print Di Klik',
+			'print_tanggal' => 'Tanggal Cetak',
+			'print_deskripsi' => 'Berita Acara Cetak Dokumen',
+			'pengambilan_id' => 'Diserahkan Oleh',
+			'pengambilan_tanggal' => 'Diserahkan Pada',
+			'pengambilan_oleh' => 'Diambil Oleh',
 			);
 	}
 

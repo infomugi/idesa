@@ -44,10 +44,17 @@ class Kepindahan extends CActiveRecord
 			array('petugas_id, provinsi_id, kabkota_id, kecamatan_id, jenis_kepindahan, status_kk_yang_tidak_pindah, status_kk_pindah, status', 'numerical', 'integerOnly'=>true),
 			array('deskripsi', 'length', 'max'=>255),
 			array('desa_id', 'length', 'max'=>10),
-			array('no_kk', 'length', 'max'=>25),
+			array('no_kk, no_resi', 'length', 'max'=>25),
 			array('nama_kk', 'length', 'max'=>50),
 			array('kode_pos', 'length', 'max'=>6),
 			array('no_kk', 'unique'),
+
+
+
+			array('print_by, print_klik, pengambilan_id', 'numerical', 'integerOnly'=>true),
+			array('print_deskripsi', 'length', 'max'=>255),
+			array('pengambilan_tanggal, print_tanggal, pengambilan_oleh', 'length', 'max'=>25),
+
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id_kepindahan, tanggal_buat, petugas_id, no_kk, nama_kk, alamat, kode_pos, alasan_pindah, alamat_tujuan, provinsi_id, kabkota_id, kecamatan_id, desa_id, jenis_kepindahan, status_kk_yang_tidak_pindah, status_kk_pindah, status', 'safe', 'on'=>'search'),
@@ -62,6 +69,8 @@ class Kepindahan extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'PengambilanPetugas'=>array(self::BELONGS_TO,'User','pengambilan_id'),
+			'PrintPetugas'=>array(self::BELONGS_TO,'User','print_by'),
 			'Petugas'=>array(self::BELONGS_TO,'User','petugas_id'),
 			'Desa'=>array(self::BELONGS_TO,'Desas','desa_id'),
 			'Kecamatan'=>array(self::BELONGS_TO,'Kecamatans','kecamatan_id'),
@@ -94,6 +103,14 @@ class Kepindahan extends CActiveRecord
 			'status_kk_pindah' => 'Status KK Pindah',
 			'status' => 'Status',
 			'deskripsi' => 'Keterangan Verifikasi',
+
+			'print_by' => 'Terakhir Dicetak Oleh',
+			'print_klik' => 'Total Tombol Print Di Klik',
+			'print_tanggal' => 'Tanggal Cetak',
+			'print_deskripsi' => 'Berita Acara Cetak Dokumen',
+			'pengambilan_id' => 'Diserahkan Oleh',
+			'pengambilan_tanggal' => 'Diserahkan Pada',
+			'pengambilan_oleh' => 'Diambil Oleh',
 			);
 	}
 
@@ -196,4 +213,26 @@ class Kepindahan extends CActiveRecord
 			return "alert-info";
 		}
 	}		
+
+	protected function beforeSave()
+	{
+		$this->pengambilan_tanggal = date('Y-m-d h:i:s', strtotime($this->pengambilan_tanggal));
+		return TRUE;
+	}
+	
+	protected function afterFind()
+	{
+		$this->pengambilan_tanggal = date('d-m-Y', strtotime($this->pengambilan_tanggal));
+		return TRUE;
+	} 
+
+	public function generateRandomString($length = 6) {
+		$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		$charactersLength = strlen($characters);
+		$randomString = '';
+		for ($i = 0; $i < $length; $i++) {
+			$randomString .= $characters[rand(0, $charactersLength - 1)];
+		}
+		return $randomString;
+	}
 }

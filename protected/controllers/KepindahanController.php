@@ -42,12 +42,12 @@ class KepindahanController extends Controller
 				'expression'=>'Yii::app()->user->getLevel()==2',
 				),	
 			array('allow',
-				'actions'=>array('view','kelola','daftar','view','desa','loadKecamatan','loadIdKota','loadKota','loadIdProvinsi','loadProvinsi','print','kabkota','kecamatan','loaddesa','report'),
+				'actions'=>array('view','kelola','daftar','view','desa','loadKecamatan','loadIdKota','loadKota','loadIdProvinsi','loadProvinsi','print','kabkota','kecamatan','loaddesa','report','pengambilan'),
 				'users'=>array('@'),
 				'expression'=>'Yii::app()->user->getLevel()==3',
 				),	
 			array('allow',
-				'actions'=>array('tambah','update','view','delete','kelola','daftar','view','desa','loadKecamatan','loadIdKota','loadKota','loadIdProvinsi','loadProvinsi','print','kabkota','kecamatan','loaddesa','report'),
+				'actions'=>array('tambah','update','view','delete','kelola','daftar','view','desa','loadKecamatan','loadIdKota','loadKota','loadIdProvinsi','loadProvinsi','print','kabkota','kecamatan','loaddesa','report','pengambilan'),
 				'users'=>array('@'),
 				'expression'=>'Yii::app()->user->getLevel()==4',
 				),											
@@ -95,6 +95,7 @@ class KepindahanController extends Controller
 			$model->status=0;
 			$model->petugas_id= YII::app()->user->id;
 			$model->tanggal_buat=date('Y-m-d h:i:s');
+			$model->no_resi = Kepindahan::model()->generateRandomString();
 			if($model->save()){
 				$this->redirect(array('view','id'=>$model->id_kepindahan));
 			}
@@ -181,6 +182,15 @@ class KepindahanController extends Controller
 		$model=Kepindahan::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
+		return $model;
+	}
+
+
+	public function loadResi($string)
+	{
+		$model=Kepindahan::model()->findByAttributes(array('no_resi'=>$string));
+		if($model===null)
+			throw new CHttpException(404,'Data yang anda cari tidak ada pada sistem kami.');
 		return $model;
 	}
 
@@ -328,6 +338,14 @@ class KepindahanController extends Controller
 	public function actionPrint($id)
 	{
 		$this->layout = "print_blank";
+
+		$update=$this->loadModel($id);
+		$update->print_by = YII::app()->user->id;
+		$update->print_klik += 1;
+		$update->print_tanggal = date('Y-m-d h:i:s');
+		$update->print_deskripsi = "Dokumen ini telah dicetak oleh " . YII::app()->user->name . " pada tanggal " .date('Y-m-d h:i:s');
+		$update->update();
+
 		$dataProvider=new CActiveDataProvider('KepindahanDetail',array(
 			'criteria'=>array(
 				'condition'=>'kepindahan_id = '.$id.'',
@@ -390,10 +408,27 @@ class KepindahanController extends Controller
 
 	public function actionSearch($string=''){
 		$this->layout = "signin";
-		$criteria = new CDbCriteria();
-		if(strlen($string)>0)
-			$criteria->addSearchCondition('id_kepindahan', $string, true, 'OR');
-		$dataProvider = new CActiveDataProvider('Kepindahan', array('criteria'=>$criteria));
-		$this->render('search', array('dataProvider'=>$dataProvider));		
+		$data=$this->loadResi($string);
+		$this->render('search', array('data'=>$data));		
 	}		
+
+
+
+	public function actionPengambilan($id)
+	{
+		$model=$this->loadModel($id);
+
+		if(isset($_POST['Kepindahan']))
+		{
+			$model->attributes=$_POST['Kepindahan'];
+			$model->pengambilan_id = YII::app()->user->id;
+			if($model->save())
+				$this->redirect(array('view','id'=>$model->id_kepindahan));
+		}
+
+		$this->render('pengambilan',array(
+			'model'=>$model,
+			));
+	}
+
 }

@@ -36,6 +36,7 @@ $this->pageTitle='Kelola Keluarga';
 							'htmlOptions'=>array('width'=>'10px', 
 								'style' => 'text-align: center;')),
 
+						'no_resi',
 						array('name'=>'kd_operator','value'=>'$data->Operator->username'),
 						'tglupdate',
 						'no_kk',

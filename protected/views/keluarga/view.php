@@ -22,29 +22,38 @@ $dataProvider=new CActiveDataProvider('Responden',array('criteria'=>array('condi
 			array('tambah'),
 			array('class' => 'btn btn-success btn-flat','title'=>'Tambah Keluarga'));
 			?>
-			<?php echo CHtml::link('<i class="fa fa-tasks"></i> List',
-				array('daftar'),
-				array('class' => 'btn btn-success btn-flat', 'title'=>'Daftar Keluarga'));
+			<?php echo CHtml::link('<i class="fa fa-list"></i> Kelola',
+				array('kelola'),
+				array('class' => 'btn btn-success btn-flat','title'=>'Kelola Keluarga'));
 				?>
-				<?php echo CHtml::link('<i class="fa fa-list"></i> Kelola',
-					array('kelola'),
-					array('class' => 'btn btn-success btn-flat','title'=>'Kelola Keluarga'));
-					?>
-					<?php echo CHtml::link('<i class="fa fa-remove"></i> Hapus', 
-						array('delete', 'id'=>$model->kd_umpi,
-							),  array('class' => 'btn btn-danger btn-flat', 'title'=>'Hapus Keluarga'));
-							?>
-							<?php echo CHtml::link('<i class="fa fa-edit"></i> Edit', 
-								array('update', 'id'=>$model->kd_umpi,
-									), array('class' => 'btn btn-info btn-flat', 'title'=>'Edit Keluarga'));
-									?>
-									
-									<?php echo CHtml::link(CHtml::encode("Setujui Surat Pengantar KK"), array('terima', 'id'=>$model->kd_umpi),array('class'=>'btn btn-success')); ?>
+				<?php echo CHtml::link('<i class="fa fa-remove"></i> Hapus', 
+					array('delete', 'id'=>$model->kd_umpi,
+						),  array('class' => 'btn btn-danger btn-flat', 'title'=>'Hapus Keluarga'));
+						?>
+						<?php echo CHtml::link('<i class="fa fa-edit"></i> Edit', 
+							array('update', 'id'=>$model->kd_umpi,
+								), array('class' => 'btn btn-info btn-flat', 'title'=>'Edit Keluarga'));
+								?>
 
-									<?php echo CHtml::link(CHtml::encode("Tolak Surat Pengantar KK"), array('tolak', 'id'=>$model->kd_umpi),array('class'=>'btn btn-danger')); ?>
+								<?php if($model->status==1): ?>
+									<?php if($model->pengambilan_id==0){ ?>
+
+										<?php if(Yii::app()->user->getLevel()==3 || Yii::app()->user->getLevel()==4): ?>
+										<?php echo CHtml::link(CHtml::encode("Pengambilan Dokumen"), array('pengambilan', 'id'=>$model->kd_umpi),array('class'=>'btn btn-success')); ?>
+									<?php endif; ?>
+
+									<?php }else{ ?>
+										<button class="btn btn-info disabled">Sudah di Ambil</button>
+										<?php } ?>
+									<?php endif; ?>
+									<?php if(Yii::app()->user->getLevel()==1 || Yii::app()->user->getLevel()==2): ?>
+										<?php echo CHtml::link(CHtml::encode("Setujui Surat Pengantar KK"), array('terima', 'id'=>$model->kd_umpi),array('class'=>'btn btn-success')); ?>
+
+										<?php echo CHtml::link(CHtml::encode("Tolak Surat Pengantar KK"), array('tolak', 'id'=>$model->kd_umpi),array('class'=>'btn btn-danger')); ?>
+									<?php endif; ?>
 
 									<?php if($model->status==1): ?>
-										<?php echo CHtml::link('<i class="fa fa-print"></i> Cetak Pengantar KK', 
+										<?php echo CHtml::link('<i class="fa fa-print"></i> Cetak', 
 											array('print', 'id'=>$model->kd_umpi,
 												),  array('class' => 'btn btn-primary pull-right btn-flat', 'title'=>'Print Pengantar KK'));
 												?>
@@ -67,7 +76,7 @@ $dataProvider=new CActiveDataProvider('Responden',array('criteria'=>array('condi
 											<?php endif; ?>
 
 
-
+											<H3><i class="fa fa-qrcode"></i> No. Resi : <?php echo $model->no_resi; ?></H3>
 											<?php $this->widget('zii.widgets.CDetailView', array(
 												'data'=>$model,
 												'htmlOptions'=>array("class"=>"table"),
@@ -161,10 +170,73 @@ $dataProvider=new CActiveDataProvider('Responden',array('criteria'=>array('condi
 																	),
 																	)); ?>
 
-																</div>
 
 
-																<STYLE>
-																	th{width:150px;}
-																</STYLE>
+																	<div class="col-md-6"> 
+																		<H3>Riwayat Cetak Dokumen</H3>
+																		<?php $this->widget('zii.widgets.CDetailView', array(
+																			'data'=>$model,
+																			'htmlOptions'=>array("class"=>"table"),
+																			'attributes'=>array(
+																				array('name'=>'print_by','value'=>$model->print_by==0 ? "-" : $model->PrintPetugas->namalengkap),
+
+																				array(
+																					'name'=>'print_klik',
+																					'value'=>$model->print_klik,
+																					'visible'=>$model->print_by!=0,
+																					),
+
+																				array(
+																					'name'=>'print_tanggal',
+																					'value'=>$model->print_tanggal,
+																					'visible'=>$model->print_by!=0,
+																					),
+
+																				array(
+																					'name'=>'print_deskripsi',
+																					'value'=>$model->print_deskripsi,
+																					'visible'=>$model->print_by!=0,
+																					),
+
+
+																				),
+																				)); ?>
+																			</div>
+
+
+																			<div class="col-md-6"> 
+																				<H3>Riwayat Pengambilan Dokumen</H3>
+																				<?php $this->widget('zii.widgets.CDetailView', array(
+																					'data'=>$model,
+																					'htmlOptions'=>array("class"=>"table"),
+																					'attributes'=>array(
+																						array(
+																							'name'=>'pengambilan_id',
+																							'value'=>$model->pengambilan_id==0 ? "Belum di Ambil" : $model->PengambilanPetugas->namalengkap
+																							),
+
+																						array(
+																							'name'=>'pengambilan_tanggal',
+																							'value'=>$model->pengambilan_tanggal,
+																							'visible'=>$model->pengambilan_id!=0,
+																							),
+
+																						array(
+																							'name'=>'pengambilan_oleh',
+																							'value'=>$model->pengambilan_oleh,
+																							'visible'=>$model->pengambilan_id!=0,
+																							),
+
+
+																						),
+																						)); ?>
+																					</div>
+																				</div>
+
+
+
+
+																				<STYLE>
+																					th{width:150px;}
+																				</STYLE>
 

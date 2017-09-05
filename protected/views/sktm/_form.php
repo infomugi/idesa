@@ -24,7 +24,7 @@
 			<?php echo $form->errorSummary($model, null, null, array('class' => 'alert alert-warning')); ?>
 
 			
-			<div class="form-group">
+<!-- 			<div class="form-group">
 
 				<div class="col-sm-4 control-label">
 					<?php echo $form->labelEx($model,'no_sktm'); ?>
@@ -35,7 +35,7 @@
 					<?php echo $form->textField($model,'no_sktm',array('class'=>'form-control','placeholder'=>'NO SKTM')); ?>
 				</div>
 
-			</div>  
+			</div>   -->
 
 
 			<div class="form-group">

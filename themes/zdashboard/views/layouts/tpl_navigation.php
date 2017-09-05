@@ -25,55 +25,57 @@
                   <ul class="nav navbar-nav navbar-right">
 
                     <?php
-                    $this->widget('zii.widgets.CMenu', array(
-                      'htmlOptions' => array('class' => 'nav navbar-nav navbar-right dropdown user-info'),
-                      'encodeLabel'=>FALSE,
-                      'items' => array(
-                        array('label' => 'Login', 'url' => array('/site/login'), 'visible' => Yii::app()->user->isGuest),
-                        array('label' => '<i class="fa fa-home"></i> Beranda', 'url' => array('/site/index'), 'visible' => !Yii::app()->user->isGuest),
-                        array('label'=>'Profil', 'url'=>array('/user/view','id'=>YII::app()->user->id)),
-                        array('label' => '<i class="fa fa-power-off"></i> Logout ('.Yii::app()->user->record->username.')', 'url' => array('/site/logout'), 'visible' => !Yii::app()->user->isGuest)
-                        )
-                      ));
-                      ?>
+                    if(!Yii::app()->user->isGuest):
+                      $this->widget('zii.widgets.CMenu', array(
+                        'htmlOptions' => array('class' => 'nav navbar-nav navbar-right dropdown user-info'),
+                        'encodeLabel'=>FALSE,
+                        'items' => array(
+                          array('label' => 'Login', 'url' => array('/site/login'), 'visible' => Yii::app()->user->isGuest),
+                          array('label' => '<i class="fa fa-home"></i> Beranda', 'url' => array('/site/index'), 'visible' => !Yii::app()->user->isGuest),
+                          array('label'=>'Profil', 'url'=>array('/user/view','id'=>YII::app()->user->id)),
+                          array('label' => '<i class="fa fa-power-off"></i> Logout ('.Yii::app()->user->record->username.')', 'url' => array('/site/logout'), 'visible' => !Yii::app()->user->isGuest)
+                          )
+                        ));
+                    endif;
+                    ?>
 
-                    </ul>
-                  </div>
-
+                  </ul>
                 </div>
 
               </div>
 
             </div>
-          </nav>
-        </div>
+
+          </div>
+        </nav>
       </div>
-    </section>
+    </div>
+  </section>
 
 
-    <div class="collapse navbar-collapse" id="menu-bar">
-      <section id="nav" class="navigation">
-        <div class="container-fluid">
-          <div class="row">
+  <div class="collapse navbar-collapse" id="menu-bar">
+    <section id="nav" class="navigation">
+      <div class="container-fluid">
+        <div class="row">
 
-            <div class="col-md-4 hidden-sm hidden-xs">
+          <div class="col-md-4 hidden-sm hidden-xs">
 
-              <ol class="breadcrumb bc-nav">
-                <?php if(isset($this->breadcrumbs)):?>
-                  <?php $this->widget('zii.widgets.CBreadcrumbs', array(
-                    'links'=>$this->breadcrumbs,
-                    'homeLink'=>CHtml::link('Beranda',array('site/index')),
-                    'htmlOptions'=>array('class'=>'')
-                    )); ?><!-- breadcrumbs -->
-                  <?php endif?> 
-                </ol>
-              </div>
+            <ol class="breadcrumb bc-nav">
+              <?php if(isset($this->breadcrumbs)):?>
+                <?php $this->widget('zii.widgets.CBreadcrumbs', array(
+                  'links'=>$this->breadcrumbs,
+                  'homeLink'=>CHtml::link('Beranda',array('site/index')),
+                  'htmlOptions'=>array('class'=>'')
+                  )); ?><!-- breadcrumbs -->
+                <?php endif?> 
+              </ol>
+            </div>
 
-              <div class="col-md-8">
-                <nav>
-                  <?php
+            <div class="col-md-8">
+              <nav>
+                <?php
 
-
+                if(!Yii::app()->user->isGuest):
                   if(YII::app()->user->getLevel()==1){
 
                    $this->widget('zii.widgets.CMenu',array(
@@ -267,6 +269,8 @@
     )); 
 
 }
+
+endif;
 ?>
 </nav>
 </div>

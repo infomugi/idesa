@@ -36,6 +36,7 @@ $this->pageTitle='Kelola Kepindahan';
 							'htmlOptions'=>array('width'=>'10px', 
 								'style' => 'text-align: center;')),
 
+						'no_resi',
 						'tanggal_buat',
 						'no_kk',
 						'nama_kk',

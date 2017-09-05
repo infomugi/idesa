@@ -45,13 +45,18 @@ class Keluarga extends CActiveRecord
 			array('nomorformulir', 'length', 'max'=>10),
 			array('nama, alamat, ip_client', 'length', 'max'=>100),
 			array('telpongenggam', 'length', 'max'=>15),
-			array('telponrumah', 'length', 'max'=>15),
+			array('telponrumah, no_resi', 'length', 'max'=>15),
 			array('rt, rw', 'length', 'max'=>2),
 			array('no_kk', 'length', 'max'=>20),
 			array('catatan', 'length', 'max'=>200),
 			array('deskripsi', 'length', 'max'=>255),
 			array('tglupdate, tglsensus, waktuupdate', 'safe'),
 			array('no_kk', 'unique'),
+
+
+			array('print_by, print_klik, pengambilan_id', 'numerical', 'integerOnly'=>true),
+			array('print_deskripsi', 'length', 'max'=>255),
+			array('pengambilan_tanggal, print_tanggal, pengambilan_oleh', 'length', 'max'=>25),		
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('kd_umpi, tglupdate, nomorformulir, kd_desa, alamat, rt, rw, telponrumah, tks, no_kk, kd_surveyor, tglsensus, catatan, waktuupdate, kd_operator, ip_client', 'safe', 'on'=>'search'),
@@ -66,6 +71,8 @@ class Keluarga extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'PengambilanPetugas'=>array(self::BELONGS_TO,'User','pengambilan_id'),
+			'PrintPetugas'=>array(self::BELONGS_TO,'User','print_by'),
 			'Desa'=>array(self::BELONGS_TO,'Desa','kd_desa'),
 			'Operator'=>array(self::BELONGS_TO,'User','kd_operator'),
 			'Surveyor'=>array(self::BELONGS_TO,'User','kd_surveyor'),
@@ -98,6 +105,14 @@ class Keluarga extends CActiveRecord
 			'waktuupdate' => 'Tanggal Update',
 			'kd_operator' => 'Operator',
 			'ip_client' => 'IP Address',
+			
+			'print_by' => 'Terakhir Dicetak Oleh',
+			'print_klik' => 'Total Tombol Print Di Klik',
+			'print_tanggal' => 'Tanggal Cetak',
+			'print_deskripsi' => 'Berita Acara Cetak Dokumen',
+			'pengambilan_id' => 'Diserahkan Oleh',
+			'pengambilan_tanggal' => 'Diserahkan Pada',
+			'pengambilan_oleh' => 'Diambil Oleh',
 			);
 	}
 

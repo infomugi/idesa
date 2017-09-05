@@ -42,12 +42,12 @@ class SktmController extends Controller
 				'expression'=>'Yii::app()->user->getLevel()==2',
 				),		
 			array('allow',
-				'actions'=>array('view','kelola','daftar','view','print','report'),
+				'actions'=>array('view','kelola','daftar','view','print','report','pengambilan'),
 				'users'=>array('@'),
 				'expression'=>'Yii::app()->user->getLevel()==3',
 				),		
 			array('allow',
-				'actions'=>array('tambah','update','view','delete','kelola','daftar','view','print','report'),
+				'actions'=>array('tambah','update','view','delete','kelola','daftar','view','print','report','pengambilan'),
 				'users'=>array('@'),
 				'expression'=>'Yii::app()->user->getLevel()==4',
 				),																	
@@ -84,6 +84,7 @@ class SktmController extends Controller
 			$model->attributes=$_POST['Sktm'];
 			$model->tanggal_input = date('Y-m-d h:i:s');
 			$model->petugas_id = YII::app()->user->id;
+			$model->no_resi = Kepindahan::model()->generateRandomString();
 			$model->status=0;
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id_sktm));
@@ -173,6 +174,14 @@ class SktmController extends Controller
 		return $model;
 	}
 
+	public function loadResi($string)
+	{
+		$model=Sktm::model()->findByAttributes(array('no_resi'=>$string));
+		if($model===null)
+			throw new CHttpException(404,'Data yang anda cari tidak ada pada sistem kami.');
+		return $model;
+	}
+
 	/**
 	 * Performs the AJAX validation.
 	 * @param Sktm $model the model to be validated
@@ -238,6 +247,14 @@ class SktmController extends Controller
 	public function actionPrint($id)
 	{
 		$this->layout = "print";
+
+		$update=$this->loadModel($id);
+		$update->print_by = YII::app()->user->id;
+		$update->print_klik += 1;
+		$update->print_tanggal = date('Y-m-d h:i:s');
+		$update->print_deskripsi = "Dokumen ini telah dicetak oleh " . YII::app()->user->name . " pada tanggal " .date('Y-m-d h:i:s');
+		$update->update();
+
 		$this->render('print',array(
 			'model'=>$this->loadModel($id),
 			));
@@ -253,11 +270,26 @@ class SktmController extends Controller
 
 	public function actionSearch($string=''){
 		$this->layout = "signin";
-		$criteria = new CDbCriteria();
-		if(strlen($string)>0)
-			$criteria->addSearchCondition('id_sktm', $string, true, 'OR');
-		$dataProvider = new CActiveDataProvider('Sktm', array('criteria'=>$criteria));
-		$this->render('search', array('dataProvider'=>$dataProvider));		
-	}	
+		$data=$this->loadResi($string);
+		$this->render('search', array('data'=>$data));		
+	}
+
+	public function actionPengambilan($id)
+	{
+		$model=$this->loadModel($id);
+
+		if(isset($_POST['Sktm']))
+		{
+			$model->attributes=$_POST['Sktm'];
+			$model->pengambilan_id = YII::app()->user->id;
+			if($model->save())
+				$this->redirect(array('view','id'=>$model->id_sktm));
+		}
+
+		$this->render('pengambilan',array(
+			'model'=>$model,
+			));
+	}
+
 
 }
