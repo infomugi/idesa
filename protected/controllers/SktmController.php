@@ -200,7 +200,7 @@ class SktmController extends Controller
 		$dataProvider=new CActiveDataProvider('Sktm',array(
 			'criteria'=>array(
 				'condition'=>'status=0',
-				'order'=>'id_sktm DESC',
+				'order'=>'id_sktm ASC',
 				'offset'=>0,
 				'limit' => 1,
 				),

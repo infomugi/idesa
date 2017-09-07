@@ -118,7 +118,7 @@
 							'showAnim'=>'drop',//'drop','fold','slideDown','fadeIn','blind','bounce','clip','drop'
 							'showButtonPanel'=>true,
 							'changeMonth'=>true,
-							'yearRange'=>'1960:2000',
+							// 'yearRange'=>'1960:2018',
 							'changeYear'=>true,
 							'defaultDate'=>'+1w',
 							),

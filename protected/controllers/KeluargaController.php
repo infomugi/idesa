@@ -318,7 +318,7 @@ class KeluargaController extends Controller
 		$dataProvider=new CActiveDataProvider('Keluarga',array(
 			'criteria'=>array(
 				'condition'=>'status=0',
-				'order'=>'kd_umpi DESC',
+				'order'=>'kd_umpi ASC',
 				'offset'=>0,
 				'limit' => 1,
 				),

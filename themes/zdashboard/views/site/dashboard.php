@@ -39,20 +39,21 @@ $this->pageTitle='Dashboard';
 								'alamat',
 								'kode_pos',
 
-								array(
-									'class'=>'CButtonColumn',
-									'template'=>'{view}',
-									'header'=>'Detail',
-									'buttons'=>array(
-										'view'=>
-										array(
-											'label'=>'Detail',
-											'url'=>'Yii::app()->createUrl("kepindahan/view", array("id"=>$data->id_kepindahan))',
-											),
+								// array(
+								// 	'class'=>'CButtonColumn',
+								// 	'template'=>'{view}',
+								// 	'header'=>'Detail',
+								// 	'buttons'=>array(
+								// 		'view'=>
+								// 		array(
+								// 			'visible'=>'YII::app()->user->record->level!=2',
+								// 			'label'=>'Detail',
+								// 			'url'=>'Yii::app()->createUrl("kepindahan/view", array("id"=>$data->id_kepindahan))',
+								// 			),
 
 
-										),
-									),
+								// 		),
+								// 	),
 
 								),
 								)); ?>
@@ -80,20 +81,20 @@ $this->pageTitle='Dashboard';
 										'nama_ayah',
 										'nama_ibu',
 
-										array(
-											'class'=>'CButtonColumn',
-											'template'=>'{view}',
-											'header'=>'Detail',
-											'buttons'=>array(
-												'view'=>
-												array(
-													'label'=>'Detail',
-													'url'=>'Yii::app()->createUrl("sktm/view", array("id"=>$data->id_sktm))',
-													),
+										// array(
+										// 	'class'=>'CButtonColumn',
+										// 	'template'=>'{view}',
+										// 	'header'=>'Detail',
+										// 	'buttons'=>array(
+										// 		'view'=>
+										// 		array(
+										// 			'label'=>'Detail',
+										// 			'url'=>'Yii::app()->createUrl("sktm/view", array("id"=>$data->id_sktm))',
+										// 			),
 
 
-												),
-											),
+										// 		),
+										// 	),
 
 										),
 										)); ?>	
@@ -121,20 +122,20 @@ $this->pageTitle='Dashboard';
 												'nama',
 												'alamat',
 
-												array(
-													'class'=>'CButtonColumn',
-													'template'=>'{view}',
-													'header'=>'Detail',
-													'buttons'=>array(
-														'view'=>
-														array(
-															'label'=>'Detail',
-															'url'=>'Yii::app()->createUrl("keluarga/view", array("id"=>$data->kd_umpi))',
-															),
+												// array(
+												// 	'class'=>'CButtonColumn',
+												// 	'template'=>'{view}',
+												// 	'header'=>'Detail',
+												// 	'buttons'=>array(
+												// 		'view'=>
+												// 		array(
+												// 			'label'=>'Detail',
+												// 			'url'=>'Yii::app()->createUrl("keluarga/view", array("id"=>$data->kd_umpi))',
+												// 			),
 
 
-														),
-													),
+												// 		),
+												// 	),
 												),
 												)); ?>
 											</div>

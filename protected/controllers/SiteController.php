@@ -39,7 +39,7 @@ class SiteController extends Controller
 			$dataKepindahan=new CActiveDataProvider('Kepindahan',array(
 				'criteria'=>array(
 					'condition'=>'status=0',
-					'order'=>'id_kepindahan DESC'
+					'order'=>'id_kepindahan ASC'
 					),
 				'pagination'=>array(
 					'pageSize'=>'12',
@@ -48,7 +48,7 @@ class SiteController extends Controller
 			$dataSktm=new CActiveDataProvider('Sktm',array(
 				'criteria'=>array(
 					'condition'=>'status=0',
-					'order'=>'id_sktm DESC'
+					'order'=>'id_sktm ASC'
 					),
 				'pagination'=>array(
 					'pageSize'=>'12',
@@ -58,7 +58,7 @@ class SiteController extends Controller
 			$dataKK=new CActiveDataProvider('Keluarga',array(
 				'criteria'=>array(
 					'condition'=>'status=0',
-					'order'=>'kd_umpi DESC'
+					'order'=>'kd_umpi ASC'
 					),
 				'pagination'=>array(
 					'pageSize'=>'12',
