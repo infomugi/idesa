@@ -11,4 +11,4 @@ $this->breadcrumbs=array(
 $this->pageTitle='Edit SKTM';
 ?>
 
-<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_form_update', array('model'=>$model)); ?>

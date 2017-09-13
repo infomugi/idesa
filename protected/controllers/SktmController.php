@@ -32,7 +32,7 @@ class SktmController extends Controller
 				'users'=>array('*'),
 				),			
 			array('allow',
-				'actions'=>array('tambah','update','view','delete','kelola','daftar','view','daftarverifikasi','terima','tolak','print','report'),
+				'actions'=>array('tambah','update','view','delete','kelola','daftar','view','daftarverifikasi','terima','tolak','print','report','verifikasi'),
 				'users'=>array('@'),
 				'expression'=>'Yii::app()->user->getLevel()==1',
 				),
@@ -42,12 +42,12 @@ class SktmController extends Controller
 				'expression'=>'Yii::app()->user->getLevel()==2',
 				),		
 			array('allow',
-				'actions'=>array('view','kelola','daftar','view','print','report','pengambilan'),
+				'actions'=>array('view','kelola','daftar','view','print','report','pengambilan','verifikasi'),
 				'users'=>array('@'),
 				'expression'=>'Yii::app()->user->getLevel()==3',
 				),		
 			array('allow',
-				'actions'=>array('tambah','update','view','delete','kelola','daftar','view','print','report','pengambilan'),
+				'actions'=>array('tambah','update','view','delete','kelola','daftar','view','print','report','pengambilan','verifikasi'),
 				'users'=>array('@'),
 				'expression'=>'Yii::app()->user->getLevel()==4',
 				),																	
@@ -290,6 +290,24 @@ class SktmController extends Controller
 			'model'=>$model,
 			));
 	}
+
+
+	public function actionVerifikasi($id)
+	{
+		$model=$this->loadModel($id);
+
+		if(isset($_POST['Sktm']))
+		{
+			$model->attributes=$_POST['Sktm'];
+			$model->verifikasi_id = YII::app()->user->id;
+			if($model->save())
+				$this->redirect(array('view','id'=>$model->id_sktm));
+		}
+
+		$this->render('verifikasi_lapangan',array(
+			'model'=>$model,
+			));
+	}	
 
 
 }

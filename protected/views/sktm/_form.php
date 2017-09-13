@@ -5,6 +5,25 @@
 ?>
 
 
+<style type="text/css">
+	.box{
+		display: none;
+	}
+</style>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('input[type="radio"]').click(function(){
+			var inputValue = $(this).attr("value");
+			var targetBox = $("." + inputValue);
+			$(".box").not(targetBox).hide();
+			$(targetBox).show();
+		});
+	});
+</script>
+
+
+
 <div class="form-normal form-horizontal clearfix">
 	<div class="col-md-9"> 
 
@@ -37,51 +56,35 @@
 
 			</div>   -->
 
-
 			<div class="form-group">
-
 				<div class="col-sm-4 control-label">
-					<?php echo $form->labelEx($model,'tanggal_buat'); ?>
-				</div>   
+					Pengantar RT / RW
+				</div>
 
 				<div class="col-sm-8">
-					<?php echo $form->error($model,'tanggal_buat'); ?>
-					<?php
-					$this->widget('zii.widgets.jui.CJuiDatePicker', array(
-						'model'=>$model,
-						'language'=>'id',
-						'attribute'=>'tanggal_buat',
-						'value'=>Yii::app()->dateFormatter->format("dd-MM-yyyy",strtotime($model->tanggal_buat)),
-						'htmlOptions'=>array(
-							'class'=>'form-control',
-							'placeholder'=>'Tanggal Buat',												
-							'tabindex'=>2
-							),
-						'options'=>array(
-							'dateFormat' => 'd-mm-yy',
-							'language'=>'id',
-												'showAnim'=>'drop',//'drop','fold','slideDown','fadeIn','blind','bounce','clip','drop'
-												'showButtonPanel'=>true,
-												'changeMonth'=>true,
-												'changeYear'=>true,
-												'defaultDate'=>'+1w',
-												),
-						));
-						?>	
-					</div>
 
-				</div>  
+					<label><input type="radio" name="colorRadio" value="red"> Tidak Ada</label>
+					<label><input type="radio" name="colorRadio" value="green"> Ada</label>
 
+					<div class="alert alert-danger box">Pengantar RT / RW <strong>Tidak Ada</strong>.</div>
+
+
+				</div>
+
+
+			</div>
+
+			<div class="green box">
 
 				<div class="form-group">
 
 					<div class="col-sm-4 control-label">
-						<?php echo $form->labelEx($model,'nama_anak'); ?>
+						<?php echo $form->labelEx($model,'tanggal_buat'); ?>
 					</div>   
 
 					<div class="col-sm-8">
-						<?php echo $form->error($model,'nama_anak'); ?>
-						<?php echo $form->textField($model,'nama_anak',array('class'=>'form-control','placeholder'=>'Nama Lengkap Anak')); ?>
+						<?php echo $form->error($model,'tanggal_buat'); ?>
+						<?php echo $form->textField($model,'tanggal_buat',array('class'=>'form-control','placeholder'=>'Tanggal','value'=>date('Y-m-d'),'readOnly'=>true)); ?>
 					</div>
 
 				</div>  
@@ -90,31 +93,39 @@
 				<div class="form-group">
 
 					<div class="col-sm-4 control-label">
-						<?php echo $form->labelEx($model,'tempat_lahir'); ?> / <?php echo $form->labelEx($model,'tanggal_lahir'); ?>
+						<?php echo $form->labelEx($model,'pengantar_no'); ?>
 					</div>   
 
-					<div class="col-sm-8 no-padding">
-						<div class="col-sm-5">
-							<?php echo $form->error($model,'tempat_lahir'); ?>
-							<?php echo $form->textField($model,'tempat_lahir',array('class'=>'form-control','placeholder'=>'Tempat Lahir',)); ?>
+					<div class="col-sm-8">
+						<?php echo $form->error($model,'pengantar_no'); ?>
+						<?php echo $form->textField($model,'pengantar_no',array('class'=>'form-control','placeholder'=>'No. Pengantar')); ?>
+					</div>
 
-						</div>
-						<div class="col-sm-7">
-							<?php echo $form->error($model,'tanggal_lahir'); ?>
-							<?php
-							$this->widget('zii.widgets.jui.CJuiDatePicker', array(
-								'model'=>$model,
+				</div> 
+
+				<div class="form-group">
+
+					<div class="col-sm-4 control-label">
+						<?php echo $form->labelEx($model,'pengantar_tanggal'); ?> 
+					</div>   
+
+					<div class="col-sm-8 ">
+
+						<?php echo $form->error($model,'pengantar_tanggal'); ?>
+						<?php
+						$this->widget('zii.widgets.jui.CJuiDatePicker', array(
+							'model'=>$model,
+							'language'=>'id',
+							'attribute'=>'pengantar_tanggal',
+							'value'=>Yii::app()->dateFormatter->format("dd-MM-yyyy",strtotime($model->pengantar_tanggal)),
+							'htmlOptions'=>array(
+								'class'=>'form-control',
+								'placeholder'=>'Tanggal Lahir',
+								'tabindex'=>2
+								),
+							'options'=>array(
+								'dateFormat' => 'd-mm-yy',
 								'language'=>'id',
-								'attribute'=>'tanggal_lahir',
-								'value'=>Yii::app()->dateFormatter->format("dd-MM-yyyy",strtotime($model->tanggal_lahir)),
-								'htmlOptions'=>array(
-									'class'=>'form-control',
-									'placeholder'=>'Tanggal Lahir',
-									'tabindex'=>2
-									),
-								'options'=>array(
-									'dateFormat' => 'd-mm-yy',
-									'language'=>'id',
 							'showAnim'=>'drop',//'drop','fold','slideDown','fadeIn','blind','bounce','clip','drop'
 							'showButtonPanel'=>true,
 							'changeMonth'=>true,
@@ -122,85 +133,81 @@
 							'changeYear'=>true,
 							'defaultDate'=>'+1w',
 							),
-								));
-								?>	
+							));
+							?>	
+
+
+						</div>
+
+					</div>  
+
+
+					<div class="form-group">
+
+						<div class="col-sm-4 control-label">
+							<?php echo $form->labelEx($model,'nama_anak'); ?>
+						</div>   
+
+						<div class="col-sm-8">
+							<?php echo $form->error($model,'nama_anak'); ?>
+							<?php echo $form->textField($model,'nama_anak',array('class'=>'form-control','placeholder'=>'Nama Lengkap Anak')); ?>
+						</div>
+
+					</div>  
+
+
+					<div class="form-group">
+
+						<div class="col-sm-4 control-label">
+							<?php echo $form->labelEx($model,'tempat_lahir'); ?> / <?php echo $form->labelEx($model,'tanggal_lahir'); ?>
+						</div>   
+
+						<div class="col-sm-8 no-padding">
+							<div class="col-sm-5">
+								<?php echo $form->error($model,'tempat_lahir'); ?>
+								<?php echo $form->textField($model,'tempat_lahir',array('class'=>'form-control','placeholder'=>'Tempat Lahir',)); ?>
 
 							</div>
-						</div>
+							<div class="col-sm-7">
+								<?php echo $form->error($model,'tanggal_lahir'); ?>
+								<?php
+								$this->widget('zii.widgets.jui.CJuiDatePicker', array(
+									'model'=>$model,
+									'language'=>'id',
+									'attribute'=>'tanggal_lahir',
+									'value'=>Yii::app()->dateFormatter->format("dd-MM-yyyy",strtotime($model->tanggal_lahir)),
+									'htmlOptions'=>array(
+										'class'=>'form-control',
+										'placeholder'=>'Tanggal Lahir',
+										'tabindex'=>2
+										),
+									'options'=>array(
+										'dateFormat' => 'd-mm-yy',
+										'language'=>'id',
+							'showAnim'=>'drop',//'drop','fold','slideDown','fadeIn','blind','bounce','clip','drop'
+							'showButtonPanel'=>true,
+							'changeMonth'=>true,
+							// 'yearRange'=>'1960:2018',
+							'changeYear'=>true,
+							'defaultDate'=>'+1w',
+							),
+									));
+									?>	
 
-					</div>  
+								</div>
+							</div>
 
-					<div class="form-group">
+						</div>  
 
-						<div class="col-sm-4 control-label">
-							<?php echo $form->labelEx($model,'tingkat'); ?>
-						</div>   
+						<div class="form-group">
 
-						<div class="col-sm-8">
-							<?php echo $form->error($model,'tingkat'); ?>
-							<?php echo $form->textField($model,'tingkat',array('class'=>'form-control','placeholder'=>'Tingkat',)); ?>
-						</div>
+							<div class="col-sm-4 control-label">
+								<?php echo $form->labelEx($model,'tingkat'); ?>
+							</div>   
 
-					</div>  
-
-
-					<div class="form-group">
-
-						<div class="col-sm-4 control-label">
-							<?php echo $form->labelEx($model,'instansi'); ?>
-						</div>   
-
-						<div class="col-sm-8">
-							<?php echo $form->error($model,'instansi'); ?>
-							<?php echo $form->textField($model,'instansi',array('class'=>'form-control','placeholder'=>'Instansi Sekolah',)); ?>
-						</div>
-
-					</div>  
-
-
-					<div class="form-group">
-
-						<div class="col-sm-4 control-label">
-							<?php echo $form->labelEx($model,'nama_ayah'); ?>
-						</div>   
-
-						<div class="col-sm-8">
-							<?php echo $form->error($model,'nama_ayah'); ?>
-							<?php echo $form->textField($model,'nama_ayah',array('class'=>'form-control','placeholder'=>'Nama Lengkap Ayah')); ?>
-						</div>
-
-					</div>  
-
-
-					<div class="form-group">
-
-						<div class="col-sm-4 control-label">
-							<?php echo $form->labelEx($model,'umur_ayah'); ?>
-						</div>   
-
-						<div class="col-sm-8">
-							<?php echo $form->error($model,'umur_ayah'); ?>
-							<?php $this->widget('CMaskedTextField',array('model'=>$model,'attribute'=>'umur_ayah','mask'=>'99','htmlOptions'=>array('class'=>'form-control')));
-							?>
-						</div>
-
-					</div>  
-
-
-					<div class="form-group">
-
-						<div class="col-sm-4 control-label">
-							<?php echo $form->labelEx($model,'agama_ayah'); ?>
-						</div>   
-
-						<div class="col-sm-8">
-							<?php echo $form->error($model,'agama_ayah'); ?>
-							<?php echo $form->dropDownList($model, "agama_ayah",
-								CHtml::listData(Agama::model()->findAll(array('order'=>'nama ASC')),
-									'kd_agama', 'nama'
-									),
-								array("empty"=>"-- Pilih Agama --", 'class'=>'form-control')
-								); ?> 
+							<div class="col-sm-8">
+								<?php echo $form->error($model,'tingkat'); ?>
+								<?php echo $form->textField($model,'tingkat',array('class'=>'form-control','placeholder'=>'Tingkat',)); ?>
 							</div>
 
 						</div>  
@@ -209,16 +216,59 @@
 						<div class="form-group">
 
 							<div class="col-sm-4 control-label">
-								<?php echo $form->labelEx($model,'pekerjaan_ayah'); ?>
+								<?php echo $form->labelEx($model,'instansi'); ?>
 							</div>   
 
 							<div class="col-sm-8">
-								<?php echo $form->error($model,'pekerjaan_ayah'); ?>
-								<?php echo $form->dropDownList($model, "pekerjaan_ayah",
-									CHtml::listData(Pekerjaan::model()->findAll(array('order'=>'nama ASC')),
-										'kd_pekerjaan', 'nama'
+								<?php echo $form->error($model,'instansi'); ?>
+								<?php echo $form->textField($model,'instansi',array('class'=>'form-control','placeholder'=>'Instansi Sekolah',)); ?>
+							</div>
+
+						</div>  
+
+
+						<div class="form-group">
+
+							<div class="col-sm-4 control-label">
+								<?php echo $form->labelEx($model,'nama_ayah'); ?>
+							</div>   
+
+							<div class="col-sm-8">
+								<?php echo $form->error($model,'nama_ayah'); ?>
+								<?php echo $form->textField($model,'nama_ayah',array('class'=>'form-control','placeholder'=>'Nama Lengkap Ayah')); ?>
+							</div>
+
+						</div>  
+
+
+						<div class="form-group">
+
+							<div class="col-sm-4 control-label">
+								<?php echo $form->labelEx($model,'umur_ayah'); ?>
+							</div>   
+
+							<div class="col-sm-8">
+								<?php echo $form->error($model,'umur_ayah'); ?>
+								<?php $this->widget('CMaskedTextField',array('model'=>$model,'attribute'=>'umur_ayah','mask'=>'99','htmlOptions'=>array('class'=>'form-control')));
+								?>
+							</div>
+
+						</div>  
+
+
+						<div class="form-group">
+
+							<div class="col-sm-4 control-label">
+								<?php echo $form->labelEx($model,'agama_ayah'); ?>
+							</div>   
+
+							<div class="col-sm-8">
+								<?php echo $form->error($model,'agama_ayah'); ?>
+								<?php echo $form->dropDownList($model, "agama_ayah",
+									CHtml::listData(Agama::model()->findAll(array('order'=>'nama ASC')),
+										'kd_agama', 'nama'
 										),
-									array("empty"=>"-- Pilih Pekerjaan --", 'class'=>'form-control')
+									array("empty"=>"-- Pilih Agama --", 'class'=>'form-control')
 									); ?> 
 								</div>
 
@@ -228,59 +278,16 @@
 							<div class="form-group">
 
 								<div class="col-sm-4 control-label">
-									<?php echo $form->labelEx($model,'alamat_ayah'); ?>
+									<?php echo $form->labelEx($model,'pekerjaan_ayah'); ?>
 								</div>   
 
 								<div class="col-sm-8">
-									<?php echo $form->error($model,'alamat_ayah'); ?>
-									<?php echo $form->textArea($model,'alamat_ayah',array('class'=>'form-control','placeholder'=>'Alamat Ayah')); ?>
-								</div>
-
-							</div>  
-
-
-							<div class="form-group">
-
-								<div class="col-sm-4 control-label">
-									<?php echo $form->labelEx($model,'nama_ibu'); ?>
-								</div>   
-
-								<div class="col-sm-8">
-									<?php echo $form->error($model,'nama_ibu'); ?>
-									<?php echo $form->textField($model,'nama_ibu',array('class'=>'form-control','placeholder'=>'Nama Ibu')); ?>
-								</div>
-
-							</div>  
-
-
-							<div class="form-group">
-
-								<div class="col-sm-4 control-label">
-									<?php echo $form->labelEx($model,'umur_ibu'); ?>
-								</div>   
-
-								<div class="col-sm-8">
-									<?php echo $form->error($model,'umur_ibu'); ?>
-									<?php $this->widget('CMaskedTextField',array('model'=>$model,'attribute'=>'umur_ibu','mask'=>'99','htmlOptions'=>array('class'=>'form-control')));
-									?>
-								</div>
-
-							</div>  
-
-
-							<div class="form-group">
-
-								<div class="col-sm-4 control-label">
-									<?php echo $form->labelEx($model,'agama_ibu'); ?>
-								</div>   
-
-								<div class="col-sm-8">
-									<?php echo $form->error($model,'agama_ibu'); ?>
-									<?php echo $form->dropDownList($model, "agama_ibu",
-										CHtml::listData(Agama::model()->findAll(array('order'=>'nama ASC')),
-											'kd_agama', 'nama'
+									<?php echo $form->error($model,'pekerjaan_ayah'); ?>
+									<?php echo $form->dropDownList($model, "pekerjaan_ayah",
+										CHtml::listData(Pekerjaan::model()->findAll(array('order'=>'nama ASC')),
+											'kd_pekerjaan', 'nama'
 											),
-										array("empty"=>"-- Pilih Agama --", 'class'=>'form-control')
+										array("empty"=>"-- Pilih Pekerjaan --", 'class'=>'form-control')
 										); ?> 
 									</div>
 
@@ -290,16 +297,59 @@
 								<div class="form-group">
 
 									<div class="col-sm-4 control-label">
-										<?php echo $form->labelEx($model,'pekerjaan_ibu'); ?>
+										<?php echo $form->labelEx($model,'alamat_ayah'); ?>
 									</div>   
 
 									<div class="col-sm-8">
-										<?php echo $form->error($model,'pekerjaan_ibu'); ?>
-										<?php echo $form->dropDownList($model, "pekerjaan_ibu",
-											CHtml::listData(Pekerjaan::model()->findAll(array('order'=>'nama ASC')),
-												'kd_pekerjaan', 'nama'
+										<?php echo $form->error($model,'alamat_ayah'); ?>
+										<?php echo $form->textArea($model,'alamat_ayah',array('class'=>'form-control','placeholder'=>'Alamat Ayah')); ?>
+									</div>
+
+								</div>  
+
+
+								<div class="form-group">
+
+									<div class="col-sm-4 control-label">
+										<?php echo $form->labelEx($model,'nama_ibu'); ?>
+									</div>   
+
+									<div class="col-sm-8">
+										<?php echo $form->error($model,'nama_ibu'); ?>
+										<?php echo $form->textField($model,'nama_ibu',array('class'=>'form-control','placeholder'=>'Nama Ibu')); ?>
+									</div>
+
+								</div>  
+
+
+								<div class="form-group">
+
+									<div class="col-sm-4 control-label">
+										<?php echo $form->labelEx($model,'umur_ibu'); ?>
+									</div>   
+
+									<div class="col-sm-8">
+										<?php echo $form->error($model,'umur_ibu'); ?>
+										<?php $this->widget('CMaskedTextField',array('model'=>$model,'attribute'=>'umur_ibu','mask'=>'99','htmlOptions'=>array('class'=>'form-control')));
+										?>
+									</div>
+
+								</div>  
+
+
+								<div class="form-group">
+
+									<div class="col-sm-4 control-label">
+										<?php echo $form->labelEx($model,'agama_ibu'); ?>
+									</div>   
+
+									<div class="col-sm-8">
+										<?php echo $form->error($model,'agama_ibu'); ?>
+										<?php echo $form->dropDownList($model, "agama_ibu",
+											CHtml::listData(Agama::model()->findAll(array('order'=>'nama ASC')),
+												'kd_agama', 'nama'
 												),
-											array("empty"=>"-- Pilih Pekerjaan --", 'class'=>'form-control')
+											array("empty"=>"-- Pilih Agama --", 'class'=>'form-control')
 											); ?> 
 										</div>
 
@@ -309,23 +359,43 @@
 									<div class="form-group">
 
 										<div class="col-sm-4 control-label">
-											<?php echo $form->labelEx($model,'alamat_ibu'); ?>
+											<?php echo $form->labelEx($model,'pekerjaan_ibu'); ?>
 										</div>   
 
 										<div class="col-sm-8">
-											<?php echo $form->error($model,'alamat_ibu'); ?>
-											<?php echo $form->textArea($model,'alamat_ibu',array('class'=>'form-control','placeholder'=>'Alamat Ibu')); ?>
+											<?php echo $form->error($model,'pekerjaan_ibu'); ?>
+											<?php echo $form->dropDownList($model, "pekerjaan_ibu",
+												CHtml::listData(Pekerjaan::model()->findAll(array('order'=>'nama ASC')),
+													'kd_pekerjaan', 'nama'
+													),
+												array("empty"=>"-- Pilih Pekerjaan --", 'class'=>'form-control')
+												); ?> 
+											</div>
+
+										</div>  
+
+
+										<div class="form-group">
+
+											<div class="col-sm-4 control-label">
+												<?php echo $form->labelEx($model,'alamat_ibu'); ?>
+											</div>   
+
+											<div class="col-sm-8">
+												<?php echo $form->error($model,'alamat_ibu'); ?>
+												<?php echo $form->textArea($model,'alamat_ibu',array('class'=>'form-control','placeholder'=>'Alamat Ibu')); ?>
+											</div>
+
+										</div>  
+
+										<div class="form-group">
+											<div class="col-md-12">  
+												<?php echo CHtml::submitButton($model->isNewRecord ? 'Simpan' : 'Edit', array('class' => 'btn btn-info btn-flat pull-right')); ?>
+											</div>
 										</div>
 
-									</div>  
-
-									<div class="form-group">
-										<div class="col-md-12">  
-										</br></br>
-										<?php echo CHtml::submitButton($model->isNewRecord ? 'Simpan' : 'Edit', array('class' => 'btn btn-info btn-flat pull-right')); ?>
 									</div>
-								</div>
 
-								<?php $this->endWidget(); ?>
+									<?php $this->endWidget(); ?>
 
 </div></div><!-- form -->
